@@ -5,14 +5,20 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Fighter extends Plane
-{
+public class Fighter extends Plane {
     private TypeOfFighter type;
     private int bombLoad;
 
+    public Fighter(){}
+
+    public Fighter(String id, PlaneBrand brand, String model, long price, TypeOfFighter type, int bombLoad) {
+        super(id, brand, model, price);
+        this.type = type;
+        this.bombLoad = bombLoad;
+    }
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Fighter{" +
                 "type='" + type + '\'' +
                 ", bombLoad=" + bombLoad +

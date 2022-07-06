@@ -8,6 +8,6 @@
 *.iml
 *.class
 .idea
-*.target
 *.txt
 logs
+target

@@ -5,14 +5,20 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CargoPlane extends Plane
-{
+public class CargoPlane extends Plane {
     private int loadCapacity;
     private int countOfCrew;
 
+    public CargoPlane(){}
+
+    public CargoPlane(String id, PlaneBrand brand, String model, long price, int loadCapacity, int countOfCrew) {
+        super(id, brand, model, price);
+        this.loadCapacity = loadCapacity;
+        this.countOfCrew = countOfCrew;
+    }
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "CargoPlane{" +
                 "loadCapacity=" + loadCapacity +
                 ", countOfCrew=" + countOfCrew +
