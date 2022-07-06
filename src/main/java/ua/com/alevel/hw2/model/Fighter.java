@@ -9,8 +9,6 @@ public class Fighter extends Plane {
     private TypeOfFighter type;
     private int bombLoad;
 
-    public Fighter(){}
-
     public Fighter(String id, PlaneBrand brand, String model, long price, TypeOfFighter type, int bombLoad) {
         super(id, brand, model, price);
         this.type = type;

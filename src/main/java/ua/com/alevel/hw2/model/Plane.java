@@ -11,8 +11,6 @@ public abstract class Plane {
     protected String model;
     protected long price;
 
-    public Plane(){}
-
     public Plane(String id, PlaneBrand brand, String model, long price) {
         this.id = id;
         this.brand = brand;

@@ -44,7 +44,7 @@ public class Main {
         }
 
         //-----------------------------------------Update
-        Fighter fighter = new Fighter();
+        Fighter fighter = new Fighter("", null, "",0, null,0);
         fighter.setId("0");
         fighter.setType(TypeOfFighter.CARRIER_BASED);
         fighter.setBombLoad(0);
