@@ -1,14 +1,15 @@
 package ua.com.alevel.hw2;
 
+import ua.com.alevel.hw2.db.PlaneDB;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.service.PlaneService;
 import java.util.List;
 
 public class Main {
-    private static final PlaneService fighterService = new PlaneService();
-    private static final PlaneService cargoPlaneService = new PlaneService();
-    private static final PlaneService passengerPlaneService = new PlaneService();
+    private static final PlaneService fighterService = new PlaneService(new PlaneDB());
+    private static final PlaneService cargoPlaneService = new PlaneService(new PlaneDB());
+    private static final PlaneService passengerPlaneService = new PlaneService(new PlaneDB());
     private static final int COUNT = 10;
 
     public static void main(String[] args) {
