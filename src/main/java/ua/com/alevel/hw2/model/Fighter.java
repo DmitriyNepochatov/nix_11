@@ -2,6 +2,7 @@ package ua.com.alevel.hw2.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -13,6 +14,21 @@ public class Fighter extends Plane {
         super(id, brand, model, price);
         this.type = type;
         this.bombLoad = bombLoad;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fighter fighter = (Fighter) o;
+        return bombLoad == fighter.bombLoad && type == fighter.type
+                && super.id == fighter.id && super.brand == fighter.brand
+                && super.model == fighter.model && super.price == fighter.price;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, bombLoad, super.id, super.brand, super.model, super.price);
     }
 
     @Override
