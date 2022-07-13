@@ -8,6 +8,7 @@ import ua.com.alevel.hw2.generatorID.GeneratorID;
 import ua.com.alevel.hw2.service.PlaneService;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class PlaneDB implements PlaneDBI {
     private final List<Plane> planes;
@@ -42,9 +43,6 @@ public class PlaneDB implements PlaneDBI {
             planes.set(i, plane);
             LOGGER.info("The plane {} has been successfully updated", plane.getId());
         }
-        else {
-            LOGGER.warn("Id was not found");
-        }
     }
 
     @Override
@@ -58,21 +56,18 @@ public class PlaneDB implements PlaneDBI {
 
             LOGGER.info("The plane {} has been successfully deleted", id);
         }
-        else {
-            LOGGER.warn("Id was not found");
-        }
     }
 
     @Override
-    public Plane findById(String id) {
+    public Optional<Plane> findById(String id) {
         for (int i = 0; i < planes.size(); i++) {
             if (planes.get(i).getId().equals(id)) {
-                return planes.get(i);
+                return Optional.of(planes.get(i));
             }
         }
 
         LOGGER.info("Id {} doesn't exist", id);
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -97,11 +92,6 @@ public class PlaneDB implements PlaneDBI {
     }
 
     private boolean isExistId(String id) {
-        if (findById(id) == null) {
-            LOGGER.info("Id {} doesn't exist", id);
-            return false;
-        }
-
-        return true;
+        return findById(id).isEmpty() ? false : true;
     }
 }
