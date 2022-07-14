@@ -10,8 +10,8 @@ public class CargoPlane extends Plane {
     private int loadCapacity;
     private int countOfCrew;
 
-    public CargoPlane(String id, PlaneBrand brand, String model, long price, int loadCapacity, int countOfCrew) {
-        super(id, brand, model, price);
+    public CargoPlane(String id, PlaneBrand brand, String model, int price, int count, int loadCapacity, int countOfCrew) {
+        super(id, brand, model, price, count);
         this.loadCapacity = loadCapacity;
         this.countOfCrew = countOfCrew;
     }
@@ -23,12 +23,12 @@ public class CargoPlane extends Plane {
         CargoPlane that = (CargoPlane) o;
         return loadCapacity == that.loadCapacity && countOfCrew == that.countOfCrew
                 && super.id == that.id && super.brand == that.brand
-                && super.model == that.model && super.price == that.price;
+                && super.model == that.model && super.price == that.price && super.count == that.count;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(loadCapacity, countOfCrew, super.id, super.brand, super.model, super.price);
+        return Objects.hash(loadCapacity, countOfCrew, super.id, super.brand, super.model, super.price, super.count);
     }
 
     @Override
@@ -40,6 +40,7 @@ public class CargoPlane extends Plane {
                 ", brand=" + brand +
                 ", model='" + model + '\'' +
                 ", price=" + price +
+                ", count=" + count +
                 '}';
     }
 }

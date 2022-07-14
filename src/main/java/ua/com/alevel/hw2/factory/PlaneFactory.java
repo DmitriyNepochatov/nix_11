@@ -6,7 +6,8 @@ import java.util.Random;
 public final class PlaneFactory {
     private static final Random RANDOM = new Random();
 
-    private PlaneFactory() {}
+    private PlaneFactory() {
+    }
 
     public static Plane[] createPlane(PlaneType planeType, int count) {
         Plane[] plane = new Plane[count];
@@ -20,19 +21,19 @@ public final class PlaneFactory {
     private static Plane create(PlaneType planeType) {
         return switch (planeType) {
             case CARGO_PLANE -> {
-                CargoPlane cargoPlane = new CargoPlane("", null, "", 0, 0, 0);
+                CargoPlane cargoPlane = new CargoPlane("", null, "", 0, 0, 0, 0);
                 cargoPlane.setLoadCapacity(RANDOM.nextInt(200));
                 cargoPlane.setCountOfCrew(RANDOM.nextInt(10));
                 yield setPlaneFields(cargoPlane);
             }
             case FIGHTER -> {
-                Fighter fighter = new Fighter("", null, "", 0, null, 0);
+                Fighter fighter = new Fighter("", null, "", 0, 0, null, 0);
                 fighter.setType(getRandomTypeOfFighter());
                 fighter.setBombLoad(RANDOM.nextInt(50));
                 yield setPlaneFields(fighter);
             }
             case PASSENGER_PLANE -> {
-                PassengerPlane passengerPlane = new PassengerPlane("", null, "", 0, 0, 0);
+                PassengerPlane passengerPlane = new PassengerPlane("", null, "", 0, 0, 0, 0);
                 passengerPlane.setNumberOfPassenger(RANDOM.nextInt(400));
                 passengerPlane.setRangeOfFlight(RANDOM.nextInt(9000));
                 yield setPlaneFields(passengerPlane);
@@ -56,7 +57,8 @@ public final class PlaneFactory {
     private static Plane setPlaneFields(Plane plane) {
         plane.setBrand(getRandomPlaneBrand());
         plane.setModel("Model-" + RANDOM.nextInt(300));
-        plane.setPrice(RANDOM.nextLong(15000000l));
+        plane.setPrice(RANDOM.nextInt(5000));
+        plane.setCount(RANDOM.nextInt(150));
         return plane;
     }
 }

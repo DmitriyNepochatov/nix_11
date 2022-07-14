@@ -5,21 +5,20 @@ import org.slf4j.LoggerFactory;
 import ua.com.alevel.hw2.model.Plane;
 import java.util.ArrayList;
 import ua.com.alevel.hw2.generatorID.GeneratorID;
-import ua.com.alevel.hw2.service.PlaneService;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class PlaneDB implements PlaneDBI {
-    private final List<Plane> planes;
-    private static final Logger LOGGER = LoggerFactory.getLogger(PlaneService.class);
+public class PlaneDB<E extends Plane> implements PlaneDBI<E> {
+    private final List<E> planes;
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlaneDB.class);
 
     public PlaneDB() {
         planes = new ArrayList<>();
     }
 
     @Override
-    public void save(Plane plane) {
+    public void save(E plane) {
         if (!isDuplicate(plane)) {
             plane.setId(GeneratorID.createID());
             planes.add(plane);
@@ -31,7 +30,7 @@ public class PlaneDB implements PlaneDBI {
     }
 
     @Override
-    public void update(Plane plane) {
+    public void update(E plane) {
         if (isExistId(plane.getId())) {
             int i;
             for (i = 0; i < planes.size(); i++) {
@@ -59,7 +58,7 @@ public class PlaneDB implements PlaneDBI {
     }
 
     @Override
-    public Optional<Plane> findById(String id) {
+    public Optional<E> findById(String id) {
         for (int i = 0; i < planes.size(); i++) {
             if (planes.get(i).getId().equals(id)) {
                 return Optional.of(planes.get(i));
@@ -71,8 +70,8 @@ public class PlaneDB implements PlaneDBI {
     }
 
     @Override
-    public List<Plane> findAll() {
-        if (planes.size() == 0) {
+    public List<E> findAll() {
+        if (planes.isEmpty()) {
             LOGGER.info("Database is empty");
             return Collections.emptyList();
         }
@@ -81,7 +80,7 @@ public class PlaneDB implements PlaneDBI {
         }
     }
 
-    private boolean isDuplicate(Plane plane) {
+    private boolean isDuplicate(E plane) {
         for (int i = 0; i < planes.size(); i++) {
             if (planes.get(i).equals(plane)) {
                 return true;
