@@ -10,8 +10,8 @@ public class PassengerPlane extends Plane {
     private int numberOfPassenger;
     private int rangeOfFlight;
 
-    public PassengerPlane(String id, PlaneBrand brand, String model, long price, int numberOfPassenger, int rangeOfFlight) {
-        super(id, brand, model, price);
+    public PassengerPlane(String id, PlaneBrand brand, String model, int price, int count, int numberOfPassenger, int rangeOfFlight) {
+        super(id, brand, model, price, count);
         this.numberOfPassenger = numberOfPassenger;
         this.rangeOfFlight = rangeOfFlight;
     }
@@ -23,12 +23,12 @@ public class PassengerPlane extends Plane {
         PassengerPlane that = (PassengerPlane) o;
         return numberOfPassenger == that.numberOfPassenger && rangeOfFlight == that.rangeOfFlight
                 && super.id == that.id && super.brand == that.brand
-                && super.model == that.model && super.price == that.price;
+                && super.model == that.model && super.price == that.price && super.count == that.count;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberOfPassenger, rangeOfFlight, super.id, super.brand, super.model, super.price);
+        return Objects.hash(numberOfPassenger, rangeOfFlight, super.id, super.brand, super.model, super.price, super.count);
     }
 
     @Override
@@ -40,6 +40,7 @@ public class PassengerPlane extends Plane {
                 ", brand=" + brand +
                 ", model='" + model + '\'' +
                 ", price=" + price +
+                ", count=" + count +
                 '}';
     }
 }
