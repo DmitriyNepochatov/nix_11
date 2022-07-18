@@ -8,6 +8,7 @@ import ua.com.alevel.hw2.model.Plane;
 import ua.com.alevel.hw2.model.PlaneBrand;
 import ua.com.alevel.hw2.model.TypeOfFighter;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 class PlaneDBTest {
@@ -99,14 +100,14 @@ class PlaneDBTest {
     @Test
     void findById() {
         target.save(plane);
-        Plane findedPlane = target.findById(plane.getId());
+        Optional<Plane> findedPlane = target.findById(plane.getId());
         Assertions.assertEquals(plane, findedPlane);
     }
 
     @Test
     void findById_idWasNotFound() {
         target.save(plane);
-        Plane findedPlane = target.findById("500");
+        Optional<Plane> findedPlane = target.findById("500");
         Assertions.assertNotEquals(plane, findedPlane);
     }
 
