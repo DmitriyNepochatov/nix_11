@@ -16,4 +16,15 @@ public class FighterService extends PlaneService<Fighter> {
         Plane[] arr = PlaneFactory.createPlane(PlaneType.FIGHTER, 1);
         return Arrays.copyOf(arr, arr.length, Fighter[].class)[0];
     }
+
+    @Override
+    public void updatePlane(Fighter updatepablePlane, Fighter plane) {
+        updatepablePlane.setType(plane.getType());
+        updatepablePlane.setBombLoad(plane.getBombLoad());
+        updatepablePlane.setModel(plane.getModel());
+        updatepablePlane.setPrice(plane.getPrice());
+        updatepablePlane.setId(plane.getId());
+        updatepablePlane.setBrand(plane.getBrand());
+        updatepablePlane.setCount(plane.getCount());
+    }
 }

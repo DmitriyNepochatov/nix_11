@@ -18,4 +18,15 @@ public class CargoPlaneService extends PlaneService<CargoPlane> {
         Plane[] arr = PlaneFactory.createPlane(PlaneType.CARGO_PLANE, 1);
         return Arrays.copyOf(arr, arr.length, CargoPlane[].class)[0];
     }
+
+    @Override
+    public void updatePlane(CargoPlane updatepablePlane, CargoPlane plane) {
+        updatepablePlane.setLoadCapacity(plane.getLoadCapacity());
+        updatepablePlane.setCountOfCrew(plane.getCountOfCrew());
+        updatepablePlane.setModel(plane.getModel());
+        updatepablePlane.setPrice(plane.getPrice());
+        updatepablePlane.setId(plane.getId());
+        updatepablePlane.setBrand(plane.getBrand());
+        updatepablePlane.setCount(plane.getCount());
+    }
 }

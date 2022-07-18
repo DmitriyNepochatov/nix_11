@@ -5,36 +5,15 @@ import ua.com.alevel.hw2.db.PlaneDBI;
 import ua.com.alevel.hw2.model.*;
 import java.util.Optional;
 
-public class OptionalExamples<E extends Plane> {
+public class OptionalExamples<E extends Plane, Service extends PlaneService> {
     private final PlaneDBI<E> planeDB;
 
     public OptionalExamples(PlaneDB<E> planeDB) {
         this.planeDB = planeDB;
     }
 
-    public void updateIfPresent(E plane) {
-        planeDB.findById(plane.getId()).ifPresent(updatepablePlane -> updatePlane(updatepablePlane, plane));
-    }
-
-    private void updatePlane(E updatepablePlane, E plane) {
-        if (updatepablePlane instanceof Fighter) {
-            ((Fighter) updatepablePlane).setType(((Fighter) plane).getType());
-            ((Fighter) updatepablePlane).setBombLoad(((Fighter) plane).getBombLoad());
-        }
-        else if (updatepablePlane instanceof CargoPlane) {
-            ((CargoPlane) updatepablePlane).setLoadCapacity(((CargoPlane) plane).getLoadCapacity());
-            ((CargoPlane) updatepablePlane).setCountOfCrew(((CargoPlane) plane).getCountOfCrew());
-        }
-        else if (updatepablePlane instanceof PassengerPlane) {
-            ((PassengerPlane) updatepablePlane).setNumberOfPassenger(((PassengerPlane) plane).getNumberOfPassenger());
-            ((PassengerPlane) updatepablePlane).setRangeOfFlight(((PassengerPlane) plane).getRangeOfFlight());
-        }
-
-        updatepablePlane.setModel(plane.getModel());
-        updatepablePlane.setPrice(plane.getPrice());
-        updatepablePlane.setId(plane.getId());
-        updatepablePlane.setBrand(plane.getBrand());
-        updatepablePlane.setCount(plane.getCount());
+    public void updateIfPresent(E plane, Service service) {
+        planeDB.findById(plane.getId()).ifPresent(updatepablePlane -> service.updatePlane(updatepablePlane, plane));
     }
 
     public E findByIdOrReturnFindablePlane(E plane) {
@@ -52,9 +31,9 @@ public class OptionalExamples<E extends Plane> {
         return planeDB.findById(id).map(plane -> plane.toString()).orElse("Id: " + id + " was not found");
     }
 
-    public void updateIfPresentOrSave(E plane) {
+    public void updateIfPresentOrSave(E plane, Service service) {
         planeDB.findById(plane.getId()).ifPresentOrElse(
-                updatepablePlane -> updatePlane(updatepablePlane, plane),
+                updatepablePlane -> service.updatePlane(updatepablePlane, plane),
                 () -> planeDB.save(plane)
         );
     }

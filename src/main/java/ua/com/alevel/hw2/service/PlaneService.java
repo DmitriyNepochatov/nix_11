@@ -54,4 +54,6 @@ public abstract class PlaneService<E extends Plane> {
     }
 
     public abstract E createPlane();
+
+    public abstract void updatePlane(E updatepablePlane, E plane);
 }

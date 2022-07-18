@@ -108,12 +108,12 @@ public class Main {
             fighterPlaneDB.save(fighterService.createPlane());
         }
 
-        OptionalExamples<Fighter> optionalExamples = new OptionalExamples<>(fighterPlaneDB);
+        OptionalExamples<Fighter, FighterService> optionalExamples = new OptionalExamples<>(fighterPlaneDB);
 
         //---------------------------------------------------------------Optional methods
         System.out.println();
         Fighter fighter2 = new Fighter("39", PlaneBrand.LOCKHEED, "F-22 Raptor", 30000, 999, TypeOfFighter.SCOUT, 10);
-        optionalExamples.updateIfPresent(fighter2);
+        optionalExamples.updateIfPresent(fighter2, fighterService);
         for (Fighter plane : fighterPlaneDB.findAll()) {
             System.out.println(plane);
         }
@@ -132,7 +132,7 @@ public class Main {
         System.out.println(optionalExamples.planeToStringMap("30"));
 
         System.out.println();
-        optionalExamples.updateIfPresentOrSave(new Fighter("39", PlaneBrand.LOCKHEED, "F-22 Raptor stage 2", 150, 50, TypeOfFighter.SCOUT, 30));
+        optionalExamples.updateIfPresentOrSave(new Fighter("39", PlaneBrand.LOCKHEED, "F-22 Raptor stage 2", 150, 50, TypeOfFighter.SCOUT, 30), fighterService);
         for (Fighter plane1 : fighterPlaneDB.findAll()) {
             System.out.println(plane1);
         }
