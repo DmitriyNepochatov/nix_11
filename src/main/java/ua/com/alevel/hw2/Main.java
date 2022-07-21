@@ -2,11 +2,14 @@ package ua.com.alevel.hw2;
 
 import ua.com.alevel.hw2.container.PlaneContainer;
 import ua.com.alevel.hw2.db.PlaneDB;
+import ua.com.alevel.hw2.list.MyLinkedList;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.service.CargoPlaneService;
 import ua.com.alevel.hw2.service.FighterService;
 import ua.com.alevel.hw2.service.OptionalExamples;
 import ua.com.alevel.hw2.service.PassengerPlaneService;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,6 +103,12 @@ public class Main {
         System.out.println();
         fighterPlaneContainer.addPlaneCount(50.584);
         System.out.println(fighterPlaneContainer.getPlane());
+
+
+        System.out.println("\n\n");
+        comparatorWorks();
+        System.out.println("\n\n");
+        linkedListWorks();
     }
 
     public static void optionalExamples() {
@@ -150,5 +159,55 @@ public class Main {
         System.out.println();
         Optional<Fighter> result2 = optionalExamples.findByIdOrBackPlaneInOptional(new Fighter("555", PlaneBrand.LOCKHEED, "B-17", 1000, 777, TypeOfFighter.BOMBER, 30));
         System.out.println(result2);
+    }
+
+    public static void comparatorWorks() {
+        List<Fighter> list = new ArrayList<>();
+        list.addAll(fighterService.findAll());
+        list.sort(new PlaneComparator<>());
+        list.forEach(System.out::println);
+    }
+
+    public static void linkedListWorks() {
+        MyLinkedList<Fighter> myLinkedList = new MyLinkedList<>();
+        myLinkedList.addHead(fighterService.createPlane(), 10);
+        try {
+            Thread.sleep(5000);    // Сделал задержку для того чтобы было наглядно видно разницу во времени между
+        }                                // первым и последним добавленным товаром
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        myLinkedList.addHead(fighterService.createPlane(), 12);
+        myLinkedList.addHead(fighterService.createPlane(), 22);
+        myLinkedList.addHead(fighterService.createPlane(), 34);
+        myLinkedList.addHead(fighterService.createPlane(), 45);
+        myLinkedList.addHead(fighterService.createPlane(), 78);
+        myLinkedList.addHead(fighterService.createPlane(), 75);
+        myLinkedList.addHead(fighterService.createPlane(), 81);
+        myLinkedList.addHead(fighterService.createPlane(), 90);
+        myLinkedList.addHead(fighterService.createPlane(), 99);
+        myLinkedList.forEach(System.out::println);
+
+        myLinkedList.deleteByVersion(99);
+        System.out.println();
+        myLinkedList.forEach(System.out::println);
+
+        System.out.println();
+        System.out.println(myLinkedList.findByVersion(10));
+
+        System.out.println("\n" + myLinkedList.getFirstDateVersion());
+        System.out.println("\n" + myLinkedList.getLastDateVersion());
+
+        System.out.println();
+        myLinkedList.setByVersion(new Fighter(null, PlaneBrand.LOCKHEED, "F-22 Raptor 2005 version", 1200, 5, TypeOfFighter.FIGHTER, 20), 10);
+        myLinkedList.forEach(System.out::println);
+
+        System.out.println("\n Count of versions: " + myLinkedList.getVersionValue());
+
+        System.out.println("\niterator");
+        Iterator<Fighter> iter = myLinkedList.iterator();
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+        }
     }
 }
