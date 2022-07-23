@@ -20,7 +20,7 @@ class PassengerPlaneServiceTest {
     @BeforeEach
     void setUp() {
         planeDB = Mockito.mock(PlaneDB.class);
-        target = new PassengerPlaneService(planeDB);
+        target = PassengerPlaneService.getInstance(planeDB);
         passengerPlane = new PassengerPlane("12",
                 PlaneBrand.BOEING,
                 "747",

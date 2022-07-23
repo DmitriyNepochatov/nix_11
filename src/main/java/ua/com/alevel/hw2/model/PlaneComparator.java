@@ -11,6 +11,6 @@ public class PlaneComparator<E extends Plane> implements Comparator<E> {
             }
             return o1.getModel().compareTo(o2.getModel());
         }
-        return Integer.compare(o1.getPrice(), o2.getPrice());
+        return Integer.compare(o2.getPrice(), o1.getPrice());
     }
 }

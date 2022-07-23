@@ -13,12 +13,14 @@ import java.util.Optional;
 class OptionalExamplesTest {
     private OptionalExamples<PassengerPlane, PassengerPlaneService> target;
     private PlaneDB<PassengerPlane> planeDB;
+    private PassengerPlaneService passengerPlaneService;
     private PassengerPlane passengerPlane;
 
     @BeforeEach
     void setUp() {
         planeDB = Mockito.mock(PlaneDB.class);
         target = new OptionalExamples<>(planeDB);
+        passengerPlaneService = PassengerPlaneService.getInstance(planeDB);
         passengerPlane = new PassengerPlane("12",
                 PlaneBrand.BOEING,
                 "747",
@@ -40,14 +42,14 @@ class OptionalExamplesTest {
                 18000);
 
         Mockito.when(planeDB.findById(passengerPlane.getId())).thenReturn(Optional.of(passengerPlane));
-        target.updateIfPresent(passengerPlaneTest, new PassengerPlaneService(planeDB));
+        target.updateIfPresent(passengerPlaneTest, passengerPlaneService);
         Assertions.assertEquals(Optional.of(passengerPlaneTest), planeDB.findById(passengerPlaneTest.getId()));
     }
 
     @Test
     void updateIfPresent_notPresent() {
         Mockito.when(planeDB.findById(passengerPlane.getId())).thenReturn(Optional.empty());
-        target.updateIfPresent(passengerPlane, new PassengerPlaneService(planeDB));
+        target.updateIfPresent(passengerPlane, passengerPlaneService);
         Assertions.assertNotEquals(Optional.of(passengerPlane), planeDB.findById(passengerPlane.getId()));
     }
 
@@ -130,14 +132,14 @@ class OptionalExamplesTest {
                 18000);
 
         Mockito.when(planeDB.findById(passengerPlane.getId())).thenReturn(Optional.of(passengerPlane));
-        target.updateIfPresentOrSave(passengerPlaneTest, new PassengerPlaneService(planeDB));
+        target.updateIfPresentOrSave(passengerPlaneTest, passengerPlaneService);
         Assertions.assertEquals(Optional.of(passengerPlaneTest), planeDB.findById(passengerPlaneTest.getId()));
     }
 
     @Test
     void updateIfPresentOrSave_ifNotPresent() {
         Mockito.when(planeDB.findById(passengerPlane.getId())).thenReturn(Optional.empty());
-        target.updateIfPresentOrSave(passengerPlane, new PassengerPlaneService(planeDB));
+        target.updateIfPresentOrSave(passengerPlane, passengerPlaneService);
         ArgumentCaptor<PassengerPlane> passengerPlaneArgumentCaptor = ArgumentCaptor.forClass(PassengerPlane.class);
         Mockito.verify(planeDB).save(passengerPlaneArgumentCaptor.capture());
         Assertions.assertEquals(passengerPlane, passengerPlaneArgumentCaptor.getValue());
