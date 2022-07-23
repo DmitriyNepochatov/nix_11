@@ -8,8 +8,25 @@ import ua.com.alevel.hw2.model.PlaneType;
 import java.util.Arrays;
 
 public class CargoPlaneService extends PlaneService<CargoPlane> {
+    private static CargoPlaneService instance;
 
-    public CargoPlaneService(PlaneDB<CargoPlane> planeDB) {
+    public static CargoPlaneService getInstance() {
+        if (instance == null) {
+            instance = new CargoPlaneService(new PlaneDB<>());
+        }
+
+        return instance;
+    }
+
+    public static CargoPlaneService getInstance(PlaneDB<CargoPlane> planeDB) {
+        if (instance == null) {
+            instance = new CargoPlaneService(planeDB);
+        }
+
+        return instance;
+    }
+
+    private CargoPlaneService(PlaneDB<CargoPlane> planeDB) {
         super(planeDB);
     }
 

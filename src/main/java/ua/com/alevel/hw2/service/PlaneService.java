@@ -22,9 +22,9 @@ public abstract class PlaneService<E extends Plane> {
         }
     }
 
-    public void update(E plane) {
+    public void update(Plane plane) {
         if (plane != null) {
-            planeDB.update(plane);
+            planeDB.update((E) plane);
         }
         else {
             throw new IllegalArgumentException("Plane was null");

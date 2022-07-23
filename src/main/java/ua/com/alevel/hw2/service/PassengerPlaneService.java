@@ -8,8 +8,25 @@ import ua.com.alevel.hw2.model.PlaneType;
 import java.util.Arrays;
 
 public class PassengerPlaneService extends PlaneService<PassengerPlane> {
+    private static PassengerPlaneService instance;
 
-    public PassengerPlaneService(PlaneDB<PassengerPlane> planeDB) {
+    public static PassengerPlaneService getInstance() {
+        if (instance == null) {
+            instance = new PassengerPlaneService(new PlaneDB<>());
+        }
+
+        return instance;
+    }
+
+    public static PassengerPlaneService getInstance(PlaneDB<PassengerPlane> planeDB) {
+        if (instance == null) {
+            instance = new PassengerPlaneService(planeDB);
+        }
+
+        return instance;
+    }
+
+    private PassengerPlaneService(PlaneDB<PassengerPlane> planeDB) {
         super(planeDB);
     }
 
