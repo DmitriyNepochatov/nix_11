@@ -38,7 +38,7 @@ public class Delete implements Command {
                 System.out.print("\nEnter the id of the plane to be deleted >> ");
                 try {
                     String id = BUFFERED_READER.readLine();
-                    if (!service.findById(id).isEmpty()) {
+                    if (service.findById(id).isPresent()) {
                         service.delete(id);
                         check = true;
                     }

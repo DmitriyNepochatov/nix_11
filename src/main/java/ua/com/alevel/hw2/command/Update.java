@@ -8,6 +8,7 @@ import ua.com.alevel.hw2.service.PlaneService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Optional;
 
 public class Update implements Command {
     private static final PlaneService<Fighter> FIGHTER_SERVICE = FighterService.getInstance();
@@ -38,8 +39,9 @@ public class Update implements Command {
                 System.out.print("\nEnter the id of the plane to be updated >> ");
                 try {
                     String id = BUFFERED_READER.readLine();
-                    if (!service.findById(id).isEmpty()) {
-                        service.update(updateFields(service.findById(id).get()));
+                    Optional<? extends Plane> plane = service.findById(id);
+                    if (plane.isPresent()) {
+                        service.update(updateFields(plane.get()));
                         check = true;
                     }
                 }

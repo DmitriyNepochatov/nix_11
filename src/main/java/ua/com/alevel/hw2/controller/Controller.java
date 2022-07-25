@@ -7,21 +7,28 @@ import ua.com.alevel.hw2.command.UtilEnumToList;
 import java.util.List;
 
 public final class Controller {
-    private Controller() {
-    }
+    private Controller() {}
 
     public static void run() {
-        int change = chooseAction();
         Commands[] commands = Commands.values();
-        Command command = commands[change].getCommand();
-        command.execute();
-        run();
+        boolean exit;
+
+        do {
+            exit = chooseAction(commands);
+        } while (!exit);
     }
 
-    private static int chooseAction() {
+    private static boolean chooseAction(Commands[] commands) {
         System.out.print("\nChoose action:");
-        Commands[] commands = Commands.values();
         List<String> commandsList = UtilEnumToList.getNamesOfType(commands);
-        return UserInputUtil.getUserInput(commands.length, commandsList);
+        int choice = UserInputUtil.getUserInput(commands.length, commandsList);
+        Command command = commands[choice].getCommand();
+        if (command == null) {
+            return true;
+        }
+        else {
+            command.execute();
+            return false;
+        }
     }
 }

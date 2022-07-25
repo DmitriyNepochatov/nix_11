@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class UtilEnumToList {
+    private UtilEnumToList(){}
 
     public static List<String> getNamesOfType(PlaneType[] planeTypes) {
         List<String> names = new ArrayList<>(planeTypes.length);

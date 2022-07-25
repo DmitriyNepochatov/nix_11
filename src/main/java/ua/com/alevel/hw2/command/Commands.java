@@ -5,7 +5,7 @@ public enum Commands {
     UPDATE("Update", new Update()),
     DELETE("Delete", new Delete()),
     PRINT("Print", new Print()),
-    EXIT("Exit", new Exit());
+    EXIT("Exit", null);
 
     private final String name;
     private final Command command;
