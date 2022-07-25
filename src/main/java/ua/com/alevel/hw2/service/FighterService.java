@@ -6,8 +6,25 @@ import ua.com.alevel.hw2.model.*;
 import java.util.Arrays;
 
 public class FighterService extends PlaneService<Fighter> {
+    private static FighterService instance;
 
-    public FighterService(PlaneDB<Fighter> planeDB) {
+    public static FighterService getInstance() {
+        if (instance == null) {
+            instance = new FighterService(new PlaneDB<>());
+        }
+
+        return instance;
+    }
+
+    public static FighterService getInstance(PlaneDB<Fighter> planeDB) {
+        if (instance == null) {
+            instance = new FighterService(planeDB);
+        }
+
+        return instance;
+    }
+
+    private FighterService(PlaneDB<Fighter> planeDB) {
         super(planeDB);
     }
 

@@ -20,9 +20,6 @@ public class MyLinkedList<E extends Plane> implements Iterable<E> {
         public Node next;
         public Node previous;
 
-        Node() {
-        }
-
         public Node(E plane, int version, Date date, Node next, Node previous) {
             this.plane = plane;
             this.version = version;
