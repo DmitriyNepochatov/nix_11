@@ -2,10 +2,9 @@ package ua.com.alevel.hw2.service;
 
 import ua.com.alevel.hw2.db.PlaneDB;
 import ua.com.alevel.hw2.factory.PlaneFactory;
-import ua.com.alevel.hw2.model.CargoPlane;
-import ua.com.alevel.hw2.model.Plane;
-import ua.com.alevel.hw2.model.PlaneType;
+import ua.com.alevel.hw2.model.*;
 import java.util.Arrays;
+import java.util.Map;
 
 public class CargoPlaneService extends PlaneService<CargoPlane> {
     private static CargoPlaneService instance;
@@ -45,5 +44,16 @@ public class CargoPlaneService extends PlaneService<CargoPlane> {
         updatepablePlane.setId(plane.getId());
         updatepablePlane.setBrand(plane.getBrand());
         updatepablePlane.setCount(plane.getCount());
+    }
+
+    @Override
+    public CargoPlane createPlaneFromMapFoo(Map<String, Object> map) {
+        return new CargoPlane(null,
+                PlaneBrand.valueOf(map.get("PlaneBrand").toString()),
+                map.get("model").toString(),
+                (Integer) map.get("price"),
+                (Integer) map.get("count"),
+                (Integer) map.get("loadCapacity"),
+                (Integer) map.get("countOfCrew"));
     }
 }

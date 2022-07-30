@@ -2,6 +2,8 @@ package ua.com.alevel.hw2.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -9,11 +11,20 @@ import java.util.Objects;
 public class Fighter extends Plane {
     private TypeOfFighter type;
     private int bombLoad;
+    private List<String> details;
 
     public Fighter(String id, PlaneBrand brand, String model, int price, int count, TypeOfFighter type, int bombLoad) {
         super(id, brand, model, price, count);
         this.type = type;
         this.bombLoad = bombLoad;
+        this.details = Collections.emptyList();
+    }
+
+    public Fighter(String id, PlaneBrand brand, String model, int price, int count, TypeOfFighter type, int bombLoad, List<String> details) {
+        super(id, brand, model, price, count);
+        this.type = type;
+        this.bombLoad = bombLoad;
+        this.details = details;
     }
 
     @Override
