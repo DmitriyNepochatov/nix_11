@@ -2,6 +2,7 @@ package ua.com.alevel.hw2.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Date;
 import java.util.Objects;
 
 @Getter
@@ -10,8 +11,10 @@ public class PassengerPlane extends Plane {
     private int numberOfPassenger;
     private int rangeOfFlight;
 
-    public PassengerPlane(String id, PlaneBrand brand, String model, int price, int count, int numberOfPassenger, int rangeOfFlight) {
-        super(id, brand, model, price, count);
+    public PassengerPlane(String id, PlaneBrand brand, String model, int price, int count, String currency,
+                          Date created, ManufacturingMaterial manufacturingMaterial, int numberOfPassenger,
+                          int rangeOfFlight) {
+        super(id, brand, model, price, count, currency, created, manufacturingMaterial);
         this.numberOfPassenger = numberOfPassenger;
         this.rangeOfFlight = rangeOfFlight;
     }
@@ -22,13 +25,16 @@ public class PassengerPlane extends Plane {
         if (o == null || getClass() != o.getClass()) return false;
         PassengerPlane that = (PassengerPlane) o;
         return numberOfPassenger == that.numberOfPassenger && rangeOfFlight == that.rangeOfFlight
-                && super.id == that.id && super.brand == that.brand
-                && super.model == that.model && super.price == that.price && super.count == that.count;
+                && super.brand.equals(that.brand)
+                && super.model.equals(that.model) && super.price == that.price && super.count == that.count &&
+                super.currency.equals(that.currency) && super.created.equals(that.created)
+                && super.manufacturingMaterial.equals(that.manufacturingMaterial);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberOfPassenger, rangeOfFlight, super.id, super.brand, super.model, super.price, super.count);
+        return Objects.hash(numberOfPassenger, rangeOfFlight, super.brand, super.model, super.price,
+                super.count, super.currency, super.created, super.manufacturingMaterial);
     }
 
     @Override
@@ -41,6 +47,9 @@ public class PassengerPlane extends Plane {
                 ", model='" + model + '\'' +
                 ", price=" + price +
                 ", count=" + count +
+                ", currency='" + currency + '\'' +
+                ", created=" + created +
+                ", manufacturingMaterial=" + manufacturingMaterial +
                 '}';
     }
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "brand": "BOEING",
+    "model": "C-5 Galaxy",
+    "price": "300",
+    "loadCapacity": "90",
+    "countOfCrew": "10",
+    "currency": "$",
+    "count": "10",
+    "created": "2020-10-15T22:15:14Z",
+    "manufacturingMaterial": {
+      "material": "Plastic",
+      "color": "Gray"
+    }
+  }
+]

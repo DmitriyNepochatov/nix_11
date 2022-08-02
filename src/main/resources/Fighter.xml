@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<fighter>
+    <brand>BOEING</brand>
+    <model>F-35</model>
+    <price currency="$">150</price>
+    <count>10</count>
+    <created>2022-05-14T17:22:14Z</created>
+    <manufacturingMaterial>
+        <material>Metal</material>
+        <color>Black</color>
+    </manufacturingMaterial>
+    <type>BOMBER</type>
+    <bombLoad>10</bombLoad>
+</fighter>

@@ -2,8 +2,8 @@ package ua.com.alevel.hw2.controller;
 
 import ua.com.alevel.hw2.command.Command;
 import ua.com.alevel.hw2.command.Commands;
-import ua.com.alevel.hw2.command.UserInputUtil;
-import ua.com.alevel.hw2.command.UtilEnumToList;
+import ua.com.alevel.hw2.utils.UserInputUtil;
+import ua.com.alevel.hw2.utils.UtilEnumToList;
 import java.util.List;
 
 public final class Controller {
