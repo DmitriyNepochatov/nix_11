@@ -10,7 +10,7 @@
       "material": "Plastic",
       "color": "Black"
     },
-    "type": "SCOUT",
+    "typeOfFighter": "SCOUT",
     "bombLoad": "3"
   }
 ]

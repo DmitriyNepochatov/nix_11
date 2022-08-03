@@ -57,15 +57,15 @@ public class FighterService extends PlaneService<Fighter> {
 
     @Override
     public Fighter createPlaneFromMapFoo(Map<String, Object> map) {
-        return new Fighter(null,
-                PlaneBrand.valueOf(map.get("brand").toString()),
-                map.get("model").toString(),
-                Integer.parseInt(map.get("price").toString()),
-                Integer.parseInt(map.get("count").toString()),
-                map.get("currency").toString(),
-                (Date) map.get("created"),
-                (ManufacturingMaterial) map.get("manufacturingMaterial"),
-                TypeOfFighter.valueOf(map.get("type").toString()),
-                Integer.parseInt(map.get("bombLoad").toString()));
+        return new Fighter.Builder(PlaneType.FIGHTER, Integer.parseInt(map.get("price").toString()))
+                .setBrand(PlaneBrand.valueOf(map.get("brand").toString()))
+                .setModel(map.get("model").toString())
+                .setCount(Integer.parseInt(map.get("count").toString()))
+                .setCurrency(map.get("currency").toString())
+                .setCreated((Date) map.get("created"))
+                .setManufacturingMaterial((ManufacturingMaterial) map.get("manufacturingMaterial"))
+                .setTypeOfFighter(TypeOfFighter.valueOf(map.get("typeOfFighter").toString()))
+                .setBombLoad(Integer.parseInt(map.get("bombLoad").toString()))
+                .build();
     }
 }

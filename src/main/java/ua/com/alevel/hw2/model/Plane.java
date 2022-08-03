@@ -15,9 +15,13 @@ public abstract class Plane {
     protected String currency;
     protected Date created;
     protected ManufacturingMaterial manufacturingMaterial;
+    protected PlaneType type;
 
-    public Plane(String id, PlaneBrand brand, String model, int price, int count,
-                 String currency, Date created, ManufacturingMaterial manufacturingMaterial) {
+    public Plane() {
+    }
+
+    public Plane(String id, PlaneBrand brand, String model, int price, int count, String currency,
+                 Date created, ManufacturingMaterial manufacturingMaterial, PlaneType type) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -26,5 +30,6 @@ public abstract class Plane {
         this.currency = currency;
         this.created = created;
         this.manufacturingMaterial = manufacturingMaterial;
+        this.type = type;
     }
 }

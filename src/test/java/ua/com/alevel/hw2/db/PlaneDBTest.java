@@ -3,10 +3,8 @@ package ua.com.alevel.hw2.db;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ua.com.alevel.hw2.model.Fighter;
-import ua.com.alevel.hw2.model.ManufacturingMaterial;
-import ua.com.alevel.hw2.model.PlaneBrand;
-import ua.com.alevel.hw2.model.TypeOfFighter;
+import ua.com.alevel.hw2.model.*;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -26,17 +24,16 @@ class PlaneDBTest {
         date = new Date();
         manufacturingMaterial = new ManufacturingMaterial("Material-" + random.nextInt(150), "Color-" + random.nextInt(300));
 
-        plane = new Fighter(
-                "" + random.nextInt(100),
-                PlaneBrand.LOCKHEED,
-                "Model-" + random.nextInt(100),
-                random.nextInt(5000),
-                random.nextInt(150),
-                "Currency-" + random.nextInt(300),
-                date, manufacturingMaterial,
-                TypeOfFighter.FIGHTER,
-                random.nextInt(10)
-        );
+        plane = new Fighter.Builder(PlaneType.FIGHTER, random.nextInt(5000))
+                .setId("" + random.nextInt(100))
+                .setBrand(PlaneBrand.LOCKHEED)
+                .setModel("Model-" + random.nextInt(100))
+                .setCount(random.nextInt(150))
+                .setCurrency("Currency-" + random.nextInt(300))
+                .setCreated(date)
+                .setManufacturingMaterial(manufacturingMaterial)
+                .setTypeOfFighter(TypeOfFighter.FIGHTER)
+                .setBombLoad(10).build();
     }
 
     @Test
@@ -60,16 +57,16 @@ class PlaneDBTest {
     void update() {
         target.save(plane);
 
-        Fighter fighter = new Fighter(plane.getId(),
-                PlaneBrand.BOEING,
-                "F-35A",
-                3500,
-                10,
-                "Currency-13",
-                date,
-                manufacturingMaterial,
-                TypeOfFighter.FIGHTER,
-                10);
+        Fighter fighter = new Fighter.Builder(PlaneType.FIGHTER, 3500)
+                .setId(plane.getId())
+                .setBrand(PlaneBrand.BOEING)
+                .setModel("F-35A")
+                .setCount(10)
+                .setCurrency("Currency-13")
+                .setCreated(date)
+                .setManufacturingMaterial(manufacturingMaterial)
+                .setTypeOfFighter(TypeOfFighter.FIGHTER)
+                .setBombLoad(10).build();
 
         target.update(fighter);
         List<Fighter> planes = target.findAll();
@@ -81,16 +78,16 @@ class PlaneDBTest {
     void update_idWasNotFound() {
         target.save(plane);
 
-        Fighter fighter = new Fighter("500",
-                PlaneBrand.BOEING,
-                "F-35A",
-                3500,
-                10,
-                "Currency-13",
-                date,
-                manufacturingMaterial,
-                TypeOfFighter.FIGHTER,
-                10);
+        Fighter fighter = new Fighter.Builder(PlaneType.FIGHTER, 3500)
+                .setId("145")
+                .setBrand(PlaneBrand.BOEING)
+                .setModel("F-35A")
+                .setCount(10)
+                .setCurrency("Currency-13")
+                .setCreated(date)
+                .setManufacturingMaterial(manufacturingMaterial)
+                .setTypeOfFighter(TypeOfFighter.FIGHTER)
+                .setBombLoad(10).build();
 
         target.update(fighter);
         List<Fighter> planes = target.findAll();

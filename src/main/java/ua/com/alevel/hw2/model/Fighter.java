@@ -9,25 +9,11 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Fighter extends Plane {
-    private TypeOfFighter type;
+    private TypeOfFighter typeOfFighter;
     private int bombLoad;
     private List<String> details;
 
-    public Fighter(String id, PlaneBrand brand, String model, int price, int count,
-                   String currency, Date created, ManufacturingMaterial manufacturingMaterial,
-                   TypeOfFighter type, int bombLoad) {
-        super(id, brand, model, price, count, currency, created, manufacturingMaterial);
-        this.type = type;
-        this.bombLoad = bombLoad;
-    }
-
-    public Fighter(String id, PlaneBrand brand, String model, int price, int count,
-                   String currency, Date created, ManufacturingMaterial manufacturingMaterial,
-                   TypeOfFighter type, int bombLoad, List<String> details) {
-        super(id, brand, model, price, count, currency, created, manufacturingMaterial);
-        this.type = type;
-        this.bombLoad = bombLoad;
-        this.details = details;
+    private Fighter() {
     }
 
     @Override
@@ -35,7 +21,7 @@ public class Fighter extends Plane {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Fighter fighter = (Fighter) o;
-        return bombLoad == fighter.bombLoad && type.equals(fighter.type)
+        return bombLoad == fighter.bombLoad && typeOfFighter.equals(fighter.typeOfFighter)
                 && super.brand.equals(fighter.brand)
                 && super.model.equals(fighter.model) && super.price == fighter.price && super.count == fighter.count &&
                 super.currency.equals(fighter.currency) && super.created.equals(fighter.created)
@@ -44,14 +30,14 @@ public class Fighter extends Plane {
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, bombLoad, super.brand, super.model, super.price, super.count,
+        return Objects.hash(typeOfFighter, bombLoad, super.brand, super.model, super.price, super.count,
                 super.currency, super.created, super.manufacturingMaterial);
     }
 
     @Override
     public String toString() {
         return "Fighter{" +
-                "type=" + type +
+                "typeOfFighter=" + typeOfFighter +
                 ", bombLoad=" + bombLoad +
                 ", id='" + id + '\'' +
                 ", brand=" + brand +
@@ -62,5 +48,77 @@ public class Fighter extends Plane {
                 ", created=" + created +
                 ", manufacturingMaterial=" + manufacturingMaterial +
                 '}';
+    }
+
+    public static class Builder {
+        private Fighter fighter;
+
+        public Builder(PlaneType type, int price) {
+            fighter = new Fighter();
+            fighter.setType(type);
+            fighter.setPrice(price);
+        }
+
+        public Builder setId(String id){
+            fighter.setId(id);
+            return this;
+        }
+
+        public Builder setModel(String model) {
+            if (model.length() > 20) {
+                throw new IllegalArgumentException("Model name must not be more than 20 characters");
+            }
+
+            fighter.setModel(model);
+            return this;
+        }
+
+        public Builder setCount(int count) {
+            if (count <= 0) {
+                throw new IllegalArgumentException("Count can't be negative or equal 0");
+            }
+
+            fighter.setCount(count);
+            return this;
+        }
+
+        public Builder setBrand(PlaneBrand brand) {
+            fighter.setBrand(brand);
+            return this;
+        }
+
+        public Builder setCurrency(String currency) {
+            fighter.setCurrency(currency);
+            return this;
+        }
+
+        public Builder setCreated(Date created) {
+            fighter.setCreated(created);
+            return this;
+        }
+
+        public Builder setManufacturingMaterial(ManufacturingMaterial manufacturingMaterial) {
+            fighter.setManufacturingMaterial(manufacturingMaterial);
+            return this;
+        }
+
+        public Builder setTypeOfFighter(TypeOfFighter typeOfFighter) {
+            fighter.setTypeOfFighter(typeOfFighter);
+            return this;
+        }
+
+        public Builder setBombLoad(int bombLoad) {
+            fighter.setBombLoad(bombLoad);
+            return this;
+        }
+
+        public Builder setDetails(List<String> details) {
+            fighter.setDetails(details);
+            return this;
+        }
+
+        public Fighter build() {
+            return fighter;
+        }
     }
 }

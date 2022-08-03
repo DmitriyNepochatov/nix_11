@@ -14,7 +14,7 @@ public class CargoPlane extends Plane {
     public CargoPlane(String id, PlaneBrand brand, String model, int price, int count,
                       String currency, Date created, ManufacturingMaterial manufacturingMaterial,
                       int loadCapacity, int countOfCrew) {
-        super(id, brand, model, price, count, currency, created, manufacturingMaterial);
+        super(id, brand, model, price, count, currency, created, manufacturingMaterial, PlaneType.CARGO_PLANE);
         this.loadCapacity = loadCapacity;
         this.countOfCrew = countOfCrew;
     }
