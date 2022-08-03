@@ -1,9 +1,11 @@
-package ua.com.alevel.hw2.service;
+package ua.com.alevel.hw2.service.services;
 
 import ua.com.alevel.hw2.db.PlaneDB;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
+import ua.com.alevel.hw2.service.PlaneService;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
 public class FighterService extends PlaneService<Fighter> {
@@ -56,11 +58,14 @@ public class FighterService extends PlaneService<Fighter> {
     @Override
     public Fighter createPlaneFromMapFoo(Map<String, Object> map) {
         return new Fighter(null,
-                PlaneBrand.valueOf(map.get("PlaneBrand").toString()),
+                PlaneBrand.valueOf(map.get("brand").toString()),
                 map.get("model").toString(),
-                (Integer) map.get("price"),
-                (Integer) map.get("count"),
-                TypeOfFighter.valueOf(map.get("TypeOfFighter").toString()),
-                (Integer) map.get("bombLoad"));
+                Integer.parseInt(map.get("price").toString()),
+                Integer.parseInt(map.get("count").toString()),
+                map.get("currency").toString(),
+                (Date) map.get("created"),
+                (ManufacturingMaterial) map.get("manufacturingMaterial"),
+                TypeOfFighter.valueOf(map.get("type").toString()),
+                Integer.parseInt(map.get("bombLoad").toString()));
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<cargoPlane>
+    <manufacturingMaterial>
+        <material>Plastic</material>
+        <color>Green</color>
+    </manufacturingMaterial>
+    <brand>LOCKHEED</brand>
+    <count>40</count>
+    <created>2018-04-05T06:17:18Z</created>
+    <model>C-130</model>
+    <price currency="$">120</price>
+    <loadCapacity>400</loadCapacity>
+    <countOfCrew>4</countOfCrew>
+</cargoPlane>

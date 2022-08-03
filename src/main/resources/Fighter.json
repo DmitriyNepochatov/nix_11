@@ -1,0 +1,16 @@
+[
+  {
+    "brand": "MC_DONNELL",
+    "model": "C-8A",
+    "price": "120",
+    "currency": "$",
+    "count": "14",
+    "created": "2010-07-20T17:22:14Z",
+    "manufacturingMaterial": {
+      "material": "Plastic",
+      "color": "Black"
+    },
+    "type": "SCOUT",
+    "bombLoad": "3"
+  }
+]

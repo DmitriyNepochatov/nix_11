@@ -1,12 +1,14 @@
-package ua.com.alevel.hw2.command;
+package ua.com.alevel.hw2.utils;
 
+import ua.com.alevel.hw2.command.Commands;
 import ua.com.alevel.hw2.model.PlaneBrand;
 import ua.com.alevel.hw2.model.PlaneType;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class UtilEnumToList {
-    private UtilEnumToList(){}
+    private UtilEnumToList() {
+    }
 
     public static List<String> getNamesOfType(PlaneType[] planeTypes) {
         List<String> names = new ArrayList<>(planeTypes.length);

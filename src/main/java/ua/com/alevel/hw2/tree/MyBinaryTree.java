@@ -3,7 +3,7 @@ package ua.com.alevel.hw2.tree;
 import ua.com.alevel.hw2.model.Fighter;
 import ua.com.alevel.hw2.model.Plane;
 import ua.com.alevel.hw2.model.PlaneComparator;
-import ua.com.alevel.hw2.service.FighterService;
+import ua.com.alevel.hw2.service.services.FighterService;
 
 public class MyBinaryTree<E extends Plane> {
     private Node root;

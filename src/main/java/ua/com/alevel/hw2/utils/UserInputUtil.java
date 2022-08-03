@@ -1,4 +1,4 @@
-package ua.com.alevel.hw2.command;
+package ua.com.alevel.hw2.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +23,7 @@ public final class UserInputUtil {
 
     private static int getUserInput(List<String> names, int length) {
         try {
-            System.out.println("\nPlease enter number between 0 and " + length);
+            System.out.println("\nPlease enter number between 0 and " + (length-1));
             for (int i = 0; i < length; i++) {
                 System.out.printf("%d) %s%n", i, names.get(i));
             }

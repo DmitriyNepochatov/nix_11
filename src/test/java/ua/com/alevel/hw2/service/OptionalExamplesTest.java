@@ -6,8 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import ua.com.alevel.hw2.db.PlaneDB;
+import ua.com.alevel.hw2.model.ManufacturingMaterial;
 import ua.com.alevel.hw2.model.PassengerPlane;
 import ua.com.alevel.hw2.model.PlaneBrand;
+import ua.com.alevel.hw2.service.services.PassengerPlaneService;
+import java.util.Date;
 import java.util.Optional;
 
 class OptionalExamplesTest {
@@ -15,17 +18,26 @@ class OptionalExamplesTest {
     private PlaneDB<PassengerPlane> planeDB;
     private PassengerPlaneService passengerPlaneService;
     private PassengerPlane passengerPlane;
+    private Date date;
+    private ManufacturingMaterial manufacturingMaterial;
 
     @BeforeEach
     void setUp() {
         planeDB = Mockito.mock(PlaneDB.class);
         target = new OptionalExamples<>(planeDB);
         passengerPlaneService = PassengerPlaneService.getInstance(planeDB);
+
+        date = new Date();
+        manufacturingMaterial = new ManufacturingMaterial("Material-" + 150, "Color-" + 300);
+
         passengerPlane = new PassengerPlane("12",
                 PlaneBrand.BOEING,
                 "747",
                 1000,
                 200,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 500,
                 15_000
         );
@@ -38,6 +50,9 @@ class OptionalExamplesTest {
                 "GoldenStar",
                 1500,
                 50,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 300,
                 18000);
 
@@ -60,6 +75,9 @@ class OptionalExamplesTest {
                 "GoldenStar",
                 1500,
                 50,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 300,
                 18000);
 
@@ -82,6 +100,9 @@ class OptionalExamplesTest {
                 "GoldenStar",
                 1500,
                 50,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 300,
                 18000);
 
@@ -97,6 +118,9 @@ class OptionalExamplesTest {
                 "GoldenStar",
                 1500,
                 50,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 300,
                 18000);
 
@@ -128,6 +152,9 @@ class OptionalExamplesTest {
                 "GoldenStar",
                 1500,
                 50,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 300,
                 18000);
 
@@ -152,6 +179,9 @@ class OptionalExamplesTest {
                 "GoldenStar",
                 1500,
                 50,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 300,
                 18000);
 
@@ -169,6 +199,9 @@ class OptionalExamplesTest {
                 "GoldenStar",
                 1500,
                 50,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 300,
                 18000);
 
@@ -197,6 +230,9 @@ class OptionalExamplesTest {
                 "GoldenStar",
                 1500,
                 50,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 300,
                 18000);
 

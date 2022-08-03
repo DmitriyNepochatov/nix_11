@@ -18,9 +18,9 @@ public abstract class PlaneService<E extends Plane> {
         this.planeDB = planeDB;
     }
 
-    public void save(E plane) {
+    public void save(Plane plane) {
         if (plane != null) {
-            planeDB.save(plane);
+            planeDB.save((E) plane);
         }
         else {
             throw new IllegalArgumentException("Plane was null");
@@ -99,5 +99,5 @@ public abstract class PlaneService<E extends Plane> {
         return mapToPlane.apply(creatableMap);
     }
 
-    protected abstract E createPlaneFromMapFoo(Map<String, Object> map);
+    public abstract E createPlaneFromMapFoo(Map<String, Object> map);
 }

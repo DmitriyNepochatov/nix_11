@@ -1,0 +1,16 @@
+[
+  {
+    "brand": "BOEING",
+    "model": "653",
+    "price": "150",
+    "numberOfPassenger": "150",
+    "currency": "$",
+    "count": "10",
+    "created": "2020-10-15T22:15:14Z",
+    "manufacturingMaterial": {
+      "material": "Paper",
+      "color": "Colored"
+    },
+    "rangeOfFlight": "900"
+  }
+]

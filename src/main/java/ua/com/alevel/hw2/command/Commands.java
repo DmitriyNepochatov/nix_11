@@ -5,6 +5,7 @@ public enum Commands {
     UPDATE("Update", new Update()),
     DELETE("Delete", new Delete()),
     PRINT("Print", new Print()),
+    READ_FROM_FILE("Read from file", new ReadFromFile()),
     EXIT("Exit", null);
 
     private final String name;

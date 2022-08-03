@@ -4,10 +4,12 @@ import ua.com.alevel.hw2.model.CargoPlane;
 import ua.com.alevel.hw2.model.Fighter;
 import ua.com.alevel.hw2.model.PassengerPlane;
 import ua.com.alevel.hw2.model.PlaneType;
-import ua.com.alevel.hw2.service.CargoPlaneService;
-import ua.com.alevel.hw2.service.FighterService;
-import ua.com.alevel.hw2.service.PassengerPlaneService;
+import ua.com.alevel.hw2.service.services.CargoPlaneService;
+import ua.com.alevel.hw2.service.services.FighterService;
+import ua.com.alevel.hw2.service.services.PassengerPlaneService;
 import ua.com.alevel.hw2.service.PlaneService;
+import ua.com.alevel.hw2.utils.UserInputUtil;
+import ua.com.alevel.hw2.utils.UtilEnumToList;
 import java.util.List;
 
 public class Create implements Command {

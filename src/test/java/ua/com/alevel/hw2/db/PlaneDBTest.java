@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ua.com.alevel.hw2.model.Fighter;
+import ua.com.alevel.hw2.model.ManufacturingMaterial;
 import ua.com.alevel.hw2.model.PlaneBrand;
 import ua.com.alevel.hw2.model.TypeOfFighter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -13,17 +15,25 @@ import java.util.Random;
 class PlaneDBTest {
     private PlaneDB<Fighter> target;
     private Fighter plane;
+    private Date date;
+    private ManufacturingMaterial manufacturingMaterial;
 
     @BeforeEach
     void setUp() {
         final Random random = new Random();
         target = new PlaneDB<>();
+
+        date = new Date();
+        manufacturingMaterial = new ManufacturingMaterial("Material-" + random.nextInt(150), "Color-" + random.nextInt(300));
+
         plane = new Fighter(
                 "" + random.nextInt(100),
                 PlaneBrand.LOCKHEED,
                 "Model-" + random.nextInt(100),
                 random.nextInt(5000),
                 random.nextInt(150),
+                "Currency-" + random.nextInt(300),
+                date, manufacturingMaterial,
                 TypeOfFighter.FIGHTER,
                 random.nextInt(10)
         );
@@ -55,6 +65,9 @@ class PlaneDBTest {
                 "F-35A",
                 3500,
                 10,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 TypeOfFighter.FIGHTER,
                 10);
 
@@ -73,6 +86,9 @@ class PlaneDBTest {
                 "F-35A",
                 3500,
                 10,
+                "Currency-13",
+                date,
+                manufacturingMaterial,
                 TypeOfFighter.FIGHTER,
                 10);
 

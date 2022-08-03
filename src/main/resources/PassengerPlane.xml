@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<passengerPlane>
+    <brand>BOEING</brand>
+    <count>10</count>
+    <price currency="$">70</price>
+    <numberOfPassenger>150</numberOfPassenger>
+    <rangeOfFlight>1500</rangeOfFlight>
+    <manufacturingMaterial>
+        <material>Wood</material>
+        <color>Without color</color>
+    </manufacturingMaterial>
+    <created>2019-10-23T09:20:18Z</created>
+    <model>737</model>
+</passengerPlane>
