@@ -9,6 +9,6 @@
         <material>Metal</material>
         <color>Black</color>
     </manufacturingMaterial>
-    <type>BOMBER</type>
+    <typeOfFighter>BOMBER</typeOfFighter>
     <bombLoad>10</bombLoad>
 </fighter>

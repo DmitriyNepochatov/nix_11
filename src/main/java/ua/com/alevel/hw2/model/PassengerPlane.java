@@ -14,7 +14,7 @@ public class PassengerPlane extends Plane {
     public PassengerPlane(String id, PlaneBrand brand, String model, int price, int count, String currency,
                           Date created, ManufacturingMaterial manufacturingMaterial, int numberOfPassenger,
                           int rangeOfFlight) {
-        super(id, brand, model, price, count, currency, created, manufacturingMaterial);
+        super(id, brand, model, price, count, currency, created, manufacturingMaterial, PlaneType.PASSENGER_PLANE);
         this.numberOfPassenger = numberOfPassenger;
         this.rangeOfFlight = rangeOfFlight;
     }

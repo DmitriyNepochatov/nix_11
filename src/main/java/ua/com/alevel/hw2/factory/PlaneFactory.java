@@ -29,9 +29,8 @@ public final class PlaneFactory {
                 yield setPlaneFields(cargoPlane);
             }
             case FIGHTER -> {
-                Fighter fighter = new Fighter("", null, "", 0, 0, "",
-                        null, null, null,0);
-                fighter.setType(getRandomTypeOfFighter());
+                Fighter fighter = new Fighter.Builder(PlaneType.FIGHTER, 0).build();
+                fighter.setTypeOfFighter(getRandomTypeOfFighter());
                 fighter.setBombLoad(RANDOM.nextInt(50));
                 yield setPlaneFields(fighter);
             }
