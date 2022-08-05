@@ -55,11 +55,16 @@ public class Fighter extends Plane {
 
         public Builder(PlaneType type, int price) {
             fighter = new Fighter();
-            fighter.setType(type);
+            if (type == null) {
+                fighter.setType(PlaneType.FIGHTER);
+            }
+            else {
+                fighter.setType(type);
+            }
             fighter.setPrice(price);
         }
 
-        public Builder setId(String id){
+        public Builder setId(String id) {
             fighter.setId(id);
             return this;
         }
