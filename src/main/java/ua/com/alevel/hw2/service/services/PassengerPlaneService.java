@@ -1,6 +1,8 @@
 package ua.com.alevel.hw2.service.services;
 
-import ua.com.alevel.hw2.db.PlaneDB;
+import ua.com.alevel.hw2.annotations.Autowired;
+import ua.com.alevel.hw2.annotations.Singleton;
+import ua.com.alevel.hw2.db.PassengerPlaneDB;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.service.PlaneService;
@@ -8,18 +10,19 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 
+@Singleton
 public class PassengerPlaneService extends PlaneService<PassengerPlane> {
     private static PassengerPlaneService instance;
 
     public static PassengerPlaneService getInstance() {
         if (instance == null) {
-            instance = new PassengerPlaneService(new PlaneDB<>());
+            instance = new PassengerPlaneService(PassengerPlaneDB.getInstance());
         }
 
         return instance;
     }
 
-    public static PassengerPlaneService getInstance(PlaneDB<PassengerPlane> planeDB) {
+    public static PassengerPlaneService getInstance(PassengerPlaneDB planeDB) {
         if (instance == null) {
             instance = new PassengerPlaneService(planeDB);
         }
@@ -27,7 +30,8 @@ public class PassengerPlaneService extends PlaneService<PassengerPlane> {
         return instance;
     }
 
-    private PassengerPlaneService(PlaneDB<PassengerPlane> planeDB) {
+    @Autowired
+    private PassengerPlaneService(PassengerPlaneDB planeDB) {
         super(planeDB);
     }
 

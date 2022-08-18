@@ -1,6 +1,8 @@
 package ua.com.alevel.hw2.service.services;
 
-import ua.com.alevel.hw2.db.PlaneDB;
+import ua.com.alevel.hw2.annotations.Autowired;
+import ua.com.alevel.hw2.annotations.Singleton;
+import ua.com.alevel.hw2.db.FighterDB;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.service.PlaneService;
@@ -8,18 +10,19 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 
+@Singleton
 public class FighterService extends PlaneService<Fighter> {
     private static FighterService instance;
 
     public static FighterService getInstance() {
         if (instance == null) {
-            instance = new FighterService(new PlaneDB<>());
+            instance = new FighterService(FighterDB.getInstance());
         }
 
         return instance;
     }
 
-    public static FighterService getInstance(PlaneDB<Fighter> planeDB) {
+    public static FighterService getInstance(FighterDB planeDB) {
         if (instance == null) {
             instance = new FighterService(planeDB);
         }
@@ -27,7 +30,8 @@ public class FighterService extends PlaneService<Fighter> {
         return instance;
     }
 
-    private FighterService(PlaneDB<Fighter> planeDB) {
+    @Autowired
+    private FighterService(FighterDB planeDB) {
         super(planeDB);
     }
 

@@ -1,6 +1,5 @@
 package ua.com.alevel.hw2.service;
 
-import ua.com.alevel.hw2.db.PlaneDB;
 import ua.com.alevel.hw2.db.PlaneDBI;
 import ua.com.alevel.hw2.model.Plane;
 import java.util.*;
@@ -14,7 +13,7 @@ public abstract class PlaneService<E extends Plane> {
     private final Predicate<Collection<E>> predicate = planes -> planes.stream().allMatch(plane -> plane.getPrice() != 0);
     private final Function<Map<String, Object>, E> mapToPlane = this::createPlaneFromMapFoo;
 
-    protected PlaneService(PlaneDB<E> planeDB) {
+    protected PlaneService(PlaneDBI<E> planeDB) {
         this.planeDB = planeDB;
     }
 
