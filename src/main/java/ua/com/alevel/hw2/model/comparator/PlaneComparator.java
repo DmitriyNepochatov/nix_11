@@ -1,5 +1,6 @@
-package ua.com.alevel.hw2.model;
+package ua.com.alevel.hw2.model.comparator;
 
+import ua.com.alevel.hw2.model.Plane;
 import java.util.Comparator;
 
 public class PlaneComparator<E extends Plane> implements Comparator<E> {

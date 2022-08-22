@@ -2,27 +2,30 @@ package ua.com.alevel.hw2.service.services;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
-import ua.com.alevel.hw2.db.PassengerPlaneDB;
+import ua.com.alevel.hw2.dao.products.passengerplanedatabase.PassengerPlaneDatabase;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
+import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
+import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import ua.com.alevel.hw2.service.PlaneService;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 @Singleton
-public class PassengerPlaneService extends PlaneService<PassengerPlane> {
+public final class PassengerPlaneService extends PlaneService<PassengerPlane> {
     private static PassengerPlaneService instance;
 
     public static PassengerPlaneService getInstance() {
         if (instance == null) {
-            instance = new PassengerPlaneService(PassengerPlaneDB.getInstance());
+            instance = new PassengerPlaneService(PassengerPlaneDatabase.getInstance());
         }
 
         return instance;
     }
 
-    public static PassengerPlaneService getInstance(PassengerPlaneDB planeDB) {
+    public static PassengerPlaneService getInstance(PassengerPlaneDatabase planeDB) {
         if (instance == null) {
             instance = new PassengerPlaneService(planeDB);
         }
@@ -31,14 +34,14 @@ public class PassengerPlaneService extends PlaneService<PassengerPlane> {
     }
 
     @Autowired
-    private PassengerPlaneService(PassengerPlaneDB planeDB) {
+    private PassengerPlaneService(PassengerPlaneDatabase planeDB) {
         super(planeDB);
     }
 
     @Override
-    public PassengerPlane createPlane() {
-        Plane[] arr = PlaneFactory.createPlane(PlaneType.PASSENGER_PLANE, 1);
-        return Arrays.copyOf(arr, arr.length, PassengerPlane[].class)[0];
+    public PassengerPlane[] createPlane(int count) {
+        Plane[] arr = PlaneFactory.createPlane(PlaneType.PASSENGER_PLANE, count);
+        return Arrays.copyOf(arr, arr.length, PassengerPlane[].class);
     }
 
     @Override
@@ -54,7 +57,7 @@ public class PassengerPlaneService extends PlaneService<PassengerPlane> {
 
     @Override
     public PassengerPlane createPlaneFromMapFoo(Map<String, Object> map) {
-        return new PassengerPlane(null,
+        return new PassengerPlane(UUID.randomUUID().toString(),
                 PlaneBrand.valueOf(map.get("brand").toString()),
                 map.get("model").toString(),
                 Integer.parseInt(map.get("price").toString()),

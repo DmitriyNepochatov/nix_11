@@ -1,13 +1,14 @@
-package ua.com.alevel.hw2.service;
+package ua.com.alevel.hw2.service.optionalexamples;
 
-import ua.com.alevel.hw2.db.PassengerPlaneDB;
-import ua.com.alevel.hw2.db.PlaneDBI;
+import ua.com.alevel.hw2.dao.products.AbstractPlaneDao;
+import ua.com.alevel.hw2.dao.products.passengerplanedatabase.PassengerPlaneDatabase;
 import ua.com.alevel.hw2.model.*;
+import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import ua.com.alevel.hw2.service.services.PassengerPlaneService;
 import java.util.Optional;
 
 public class OptionalExamplesPassengerPlane {
-    private final PlaneDBI<PassengerPlane> planeDB = PassengerPlaneDB.getInstance();
+    private final AbstractPlaneDao<PassengerPlane> planeDB = PassengerPlaneDatabase.getInstance();
 
     public void updateIfPresent(PassengerPlane plane, PassengerPlaneService service) {
         planeDB.findById(plane.getId()).ifPresent(updatepablePlane -> service.updatePlane(updatepablePlane, plane));

@@ -41,4 +41,27 @@ public final class UserInputUtil {
         }
         return -1;
     }
+
+    public static int getUserInputInt(String command) {
+        boolean check = false;
+        int result = -1;
+        while (!check) {
+            System.out.print("\n" + command + " >> ");
+            try {
+                String value = READER.readLine();
+                result = Integer.parseInt(value);
+
+                if (result <= 0) {
+                    throw new IllegalArgumentException();
+                }
+
+                check = true;
+            }
+            catch (Exception e) {
+                System.out.println("Incorrect input");
+            }
+        }
+
+        return result;
+    }
 }

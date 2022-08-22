@@ -2,22 +2,14 @@ package ua.com.alevel.hw2.db;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.com.alevel.hw2.annotations.Autowired;
-import ua.com.alevel.hw2.annotations.Singleton;
-import ua.com.alevel.hw2.generatorID.GeneratorID;
-import ua.com.alevel.hw2.model.CargoPlane;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import ua.com.alevel.hw2.model.cargoplane.CargoPlane;
+import java.util.*;
 
-@Singleton
 public class CargoPlaneDB implements PlaneDBI<CargoPlane> {
     private final List<CargoPlane> planes;
     private static final Logger LOGGER = LoggerFactory.getLogger(CargoPlaneDB.class);
     private static CargoPlaneDB instance;
 
-    @Autowired
     private CargoPlaneDB() {
         planes = new ArrayList<>();
     }
@@ -33,7 +25,7 @@ public class CargoPlaneDB implements PlaneDBI<CargoPlane> {
     @Override
     public void save(CargoPlane plane) {
         if (!isDuplicate(plane)) {
-            plane.setId(GeneratorID.createID());
+            plane.setId(UUID.randomUUID().toString());
             planes.add(plane);
             LOGGER.info("Plane {} {} has been created", plane.getId(), plane.getClass().getSimpleName());
         }

@@ -1,6 +1,9 @@
 package ua.com.alevel.hw2.command;
 
 import ua.com.alevel.hw2.model.*;
+import ua.com.alevel.hw2.model.cargoplane.CargoPlane;
+import ua.com.alevel.hw2.model.fighter.Fighter;
+import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import ua.com.alevel.hw2.service.services.CargoPlaneService;
 import ua.com.alevel.hw2.service.services.FighterService;
 import ua.com.alevel.hw2.service.services.PassengerPlaneService;
@@ -9,7 +12,7 @@ import ua.com.alevel.hw2.utils.UserInputUtil;
 import ua.com.alevel.hw2.utils.UtilEnumToList;
 import java.util.List;
 
-public class Print implements Command {
+public class PrintAll implements Command {
     private static final PlaneService<Fighter> FIGHTER_SERVICE = FighterService.getInstance();
     private static final PlaneService<CargoPlane> CARGO_PLANE_SERVICE = CargoPlaneService.getInstance();
     private static final PlaneService<PassengerPlane> PASSENGER_PLANE_SERVICE = PassengerPlaneService.getInstance();

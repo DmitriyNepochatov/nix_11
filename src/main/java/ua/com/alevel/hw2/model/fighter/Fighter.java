@@ -1,7 +1,9 @@
-package ua.com.alevel.hw2.model;
+package ua.com.alevel.hw2.model.fighter;
 
 import lombok.Getter;
 import lombok.Setter;
+import ua.com.alevel.hw2.model.*;
+import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
