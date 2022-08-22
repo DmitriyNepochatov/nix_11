@@ -1,25 +1,30 @@
 package ua.com.alevel.hw2.db;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ua.com.alevel.hw2.model.*;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-class PlaneDBTest {
-    private PlaneDB<Fighter> target;
+class FighterDBTest {
+    private static FighterDB target;
     private Fighter plane;
     private Date date;
     private ManufacturingMaterial manufacturingMaterial;
 
+    @BeforeAll
+    public static void setup() {
+        target = FighterDB.getInstance();
+    }
+
     @BeforeEach
     void setUp() {
         final Random random = new Random();
-        target = new PlaneDB<>();
+        target.findAll().clear();
 
         date = new Date();
         manufacturingMaterial = new ManufacturingMaterial("Material-" + random.nextInt(150), "Color-" + random.nextInt(300));

@@ -2,23 +2,36 @@ package ua.com.alevel.hw2.db;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.com.alevel.hw2.model.Plane;
-import java.util.ArrayList;
+import ua.com.alevel.hw2.annotations.Autowired;
+import ua.com.alevel.hw2.annotations.Singleton;
 import ua.com.alevel.hw2.generatorID.GeneratorID;
+import ua.com.alevel.hw2.model.PassengerPlane;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class PlaneDB<E extends Plane> implements PlaneDBI<E> {
-    private final List<E> planes;
-    private static final Logger LOGGER = LoggerFactory.getLogger(PlaneDB.class);
+@Singleton
+public class PassengerPlaneDB implements PlaneDBI<PassengerPlane> {
+    private final List<PassengerPlane> planes;
+    private static final Logger LOGGER = LoggerFactory.getLogger(PassengerPlaneDB.class);
+    private static PassengerPlaneDB instance;
 
-    public PlaneDB() {
+    @Autowired
+    private PassengerPlaneDB() {
         planes = new ArrayList<>();
     }
 
+    public static PassengerPlaneDB getInstance() {
+        if (instance == null) {
+            instance = new PassengerPlaneDB();
+        }
+
+        return instance;
+    }
+
     @Override
-    public void save(E plane) {
+    public void save(PassengerPlane plane) {
         if (!isDuplicate(plane)) {
             plane.setId(GeneratorID.createID());
             planes.add(plane);
@@ -30,8 +43,8 @@ public class PlaneDB<E extends Plane> implements PlaneDBI<E> {
     }
 
     @Override
-    public void update(E plane) {
-        if (isExistId(plane.getId())) {
+    public void update(PassengerPlane plane) {
+        if (findById(plane.getId()).isPresent()) {
             int i;
             for (i = 0; i < planes.size(); i++) {
                 if (planes.get(i).getId().equals(plane.getId())) {
@@ -46,7 +59,7 @@ public class PlaneDB<E extends Plane> implements PlaneDBI<E> {
 
     @Override
     public void delete(String id) {
-        if (isExistId(id)) {
+        if (findById(id).isPresent()) {
             for (int i = 0; i < planes.size(); i++) {
                 if (planes.get(i).getId().equals(id)) {
                     planes.remove(planes.get(i));
@@ -58,7 +71,7 @@ public class PlaneDB<E extends Plane> implements PlaneDBI<E> {
     }
 
     @Override
-    public Optional<E> findById(String id) {
+    public Optional<PassengerPlane> findById(String id) {
         for (int i = 0; i < planes.size(); i++) {
             if (planes.get(i).getId().equals(id)) {
                 return Optional.of(planes.get(i));
@@ -70,7 +83,7 @@ public class PlaneDB<E extends Plane> implements PlaneDBI<E> {
     }
 
     @Override
-    public List<E> findAll() {
+    public List<PassengerPlane> findAll() {
         if (planes.isEmpty()) {
             LOGGER.info("Database is empty");
             return Collections.emptyList();
@@ -80,7 +93,7 @@ public class PlaneDB<E extends Plane> implements PlaneDBI<E> {
         }
     }
 
-    private boolean isDuplicate(E plane) {
+    private boolean isDuplicate(PassengerPlane plane) {
         for (int i = 0; i < planes.size(); i++) {
             if (planes.get(i).equals(plane)) {
                 return true;
@@ -88,9 +101,5 @@ public class PlaneDB<E extends Plane> implements PlaneDBI<E> {
         }
 
         return false;
-    }
-
-    private boolean isExistId(String id) {
-        return findById(id).isEmpty() ? false : true;
     }
 }

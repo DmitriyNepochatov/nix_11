@@ -1,30 +1,38 @@
 package ua.com.alevel.hw2.service;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
-import ua.com.alevel.hw2.db.PlaneDB;
+import ua.com.alevel.hw2.db.PassengerPlaneDB;
 import ua.com.alevel.hw2.model.ManufacturingMaterial;
 import ua.com.alevel.hw2.model.PassengerPlane;
 import ua.com.alevel.hw2.model.PlaneBrand;
 import ua.com.alevel.hw2.service.services.PassengerPlaneService;
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.Optional;
 import static org.mockito.ArgumentMatchers.anyString;
 
 class PassengerPlaneServiceTest {
     private PassengerPlaneService target;
-    private PlaneDB<PassengerPlane> planeDB;
+    private static PassengerPlaneDB planeDB;
     private PassengerPlane passengerPlane;
     private Date date;
     private ManufacturingMaterial manufacturingMaterial;
 
+    @BeforeAll
+    private static void setup() {
+        planeDB = Mockito.mock(PassengerPlaneDB.class);
+        setMock(planeDB);
+    }
+
     @BeforeEach
     void setUp() {
-        planeDB = Mockito.mock(PlaneDB.class);
+        Mockito.reset(planeDB);
         target = PassengerPlaneService.getInstance(planeDB);
 
         date = new Date();
@@ -127,5 +135,16 @@ class PassengerPlaneServiceTest {
         Mockito.when(planeDB.findAll()).thenCallRealMethod();
         Assertions.assertThrows(NullPointerException.class, () -> target.findAll());
         Mockito.verify(planeDB).findAll();
+    }
+
+    private static void setMock(PassengerPlaneDB mock) {
+        try {
+            Field instance = PassengerPlaneDB.class.getDeclaredField("instance");
+            instance.setAccessible(true);
+            instance.set(instance, mock);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

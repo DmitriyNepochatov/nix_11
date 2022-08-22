@@ -1,30 +1,38 @@
 package ua.com.alevel.hw2.service;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import ua.com.alevel.hw2.db.PlaneDB;
+import ua.com.alevel.hw2.db.PassengerPlaneDB;
 import ua.com.alevel.hw2.model.ManufacturingMaterial;
 import ua.com.alevel.hw2.model.PassengerPlane;
 import ua.com.alevel.hw2.model.PlaneBrand;
 import ua.com.alevel.hw2.service.services.PassengerPlaneService;
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.Optional;
 
 class OptionalExamplesTest {
-    private OptionalExamples<PassengerPlane, PassengerPlaneService> target;
-    private PlaneDB<PassengerPlane> planeDB;
-    private PassengerPlaneService passengerPlaneService;
+    private OptionalExamplesPassengerPlane target;
+    private static PassengerPlaneDB planeDB;
+    private static PassengerPlaneService passengerPlaneService;
     private PassengerPlane passengerPlane;
     private Date date;
     private ManufacturingMaterial manufacturingMaterial;
 
+    @BeforeAll
+    public static void setup() {
+        planeDB = Mockito.mock(PassengerPlaneDB.class);
+        setMock(planeDB);
+    }
+
     @BeforeEach
     void setUp() {
-        planeDB = Mockito.mock(PlaneDB.class);
-        target = new OptionalExamples<>(planeDB);
+        Mockito.reset(planeDB);
+        target = new OptionalExamplesPassengerPlane();
         passengerPlaneService = PassengerPlaneService.getInstance(planeDB);
 
         date = new Date();
@@ -246,5 +254,16 @@ class OptionalExamplesTest {
         Mockito.when(planeDB.findById(passengerPlane.getId())).thenReturn(Optional.of(passengerPlane));
         Optional<PassengerPlane> result = target.findByIdOrBackPlaneInOptional(passengerPlane);
         Assertions.assertEquals(Optional.of(passengerPlane), result);
+    }
+
+    private static void setMock(PassengerPlaneDB mock) {
+        try {
+            Field instance = PassengerPlaneDB.class.getDeclaredField("instance");
+            instance.setAccessible(true);
+            instance.set(instance, mock);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
