@@ -1,6 +1,6 @@
 package ua.com.alevel.hw2.service;
 
-import ua.com.alevel.hw2.db.PlaneDBI;
+import ua.com.alevel.hw2.dao.products.AbstractPlaneDao;
 import ua.com.alevel.hw2.model.Plane;
 import java.util.*;
 import java.util.function.Function;
@@ -8,12 +8,12 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class PlaneService<E extends Plane> {
-    private final PlaneDBI<E> planeDB;
+    private final AbstractPlaneDao<E> planeDB;
 
     private final Predicate<Collection<E>> predicate = planes -> planes.stream().allMatch(plane -> plane.getPrice() != 0);
     private final Function<Map<String, Object>, E> mapToPlane = this::createPlaneFromMapFoo;
 
-    protected PlaneService(PlaneDBI<E> planeDB) {
+    protected PlaneService(AbstractPlaneDao<E> planeDB) {
         this.planeDB = planeDB;
     }
 
@@ -23,6 +23,15 @@ public abstract class PlaneService<E extends Plane> {
         }
         else {
             throw new IllegalArgumentException("Plane was null");
+        }
+    }
+
+    public void saveAll(E[] planes) {
+        if (planes.length != 0) {
+            planeDB.saveAll(planes);
+        }
+        else {
+            throw new IllegalArgumentException("Plane array was null");
         }
     }
 
@@ -57,7 +66,11 @@ public abstract class PlaneService<E extends Plane> {
         return planeDB.findAll();
     }
 
-    public abstract E createPlane();
+    public List<E> findAllInStock() {
+        return planeDB.findAllInStock();
+    }
+
+    public abstract E[] createPlane(int count);
 
     public abstract void updatePlane(E updatepablePlane, E plane);
 

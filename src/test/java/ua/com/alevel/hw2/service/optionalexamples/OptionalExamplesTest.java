@@ -1,4 +1,4 @@
-package ua.com.alevel.hw2.service;
+package ua.com.alevel.hw2.service.optionalexamples;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -6,9 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import ua.com.alevel.hw2.db.PassengerPlaneDB;
-import ua.com.alevel.hw2.model.ManufacturingMaterial;
-import ua.com.alevel.hw2.model.PassengerPlane;
+import ua.com.alevel.hw2.dao.products.passengerplanedatabase.PassengerPlaneDatabase;
+import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
+import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import ua.com.alevel.hw2.model.PlaneBrand;
 import ua.com.alevel.hw2.service.services.PassengerPlaneService;
 import java.lang.reflect.Field;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 class OptionalExamplesTest {
     private OptionalExamplesPassengerPlane target;
-    private static PassengerPlaneDB planeDB;
+    private static PassengerPlaneDatabase planeDB;
     private static PassengerPlaneService passengerPlaneService;
     private PassengerPlane passengerPlane;
     private Date date;
@@ -25,7 +25,7 @@ class OptionalExamplesTest {
 
     @BeforeAll
     public static void setup() {
-        planeDB = Mockito.mock(PassengerPlaneDB.class);
+        planeDB = Mockito.mock(PassengerPlaneDatabase.class);
         setMock(planeDB);
     }
 
@@ -256,9 +256,9 @@ class OptionalExamplesTest {
         Assertions.assertEquals(Optional.of(passengerPlane), result);
     }
 
-    private static void setMock(PassengerPlaneDB mock) {
+    private static void setMock(PassengerPlaneDatabase mock) {
         try {
-            Field instance = PassengerPlaneDB.class.getDeclaredField("instance");
+            Field instance = PassengerPlaneDatabase.class.getDeclaredField("instance");
             instance.setAccessible(true);
             instance.set(instance, mock);
         }

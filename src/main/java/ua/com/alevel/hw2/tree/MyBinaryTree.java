@@ -1,8 +1,8 @@
 package ua.com.alevel.hw2.tree;
 
-import ua.com.alevel.hw2.model.Fighter;
+import ua.com.alevel.hw2.model.fighter.Fighter;
 import ua.com.alevel.hw2.model.Plane;
-import ua.com.alevel.hw2.model.PlaneComparator;
+import ua.com.alevel.hw2.model.comparator.PlaneComparator;
 import ua.com.alevel.hw2.service.services.FighterService;
 
 public class MyBinaryTree<E extends Plane> {
@@ -104,7 +104,7 @@ public class MyBinaryTree<E extends Plane> {
     public static void main(String[] args) {
         FighterService fighterService = FighterService.getInstance();
         for (int i = 0; i < 10; i++) {
-            fighterService.save(fighterService.createPlane());
+            fighterService.save(fighterService.createPlane(1)[0]);
         }
 
         MyBinaryTree<Fighter> tree = new MyBinaryTree<>();

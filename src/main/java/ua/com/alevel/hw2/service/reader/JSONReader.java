@@ -1,6 +1,6 @@
 package ua.com.alevel.hw2.service.reader;
 
-import ua.com.alevel.hw2.model.ManufacturingMaterial;
+import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;

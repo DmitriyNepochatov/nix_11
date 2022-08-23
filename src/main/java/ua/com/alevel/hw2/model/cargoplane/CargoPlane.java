@@ -1,7 +1,11 @@
-package ua.com.alevel.hw2.model;
+package ua.com.alevel.hw2.model.cargoplane;
 
 import lombok.Getter;
 import lombok.Setter;
+import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
+import ua.com.alevel.hw2.model.Plane;
+import ua.com.alevel.hw2.model.PlaneBrand;
+import ua.com.alevel.hw2.model.PlaneType;
 import java.util.Date;
 import java.util.Objects;
 

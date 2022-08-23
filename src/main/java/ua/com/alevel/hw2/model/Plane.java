@@ -2,6 +2,7 @@ package ua.com.alevel.hw2.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import java.util.Date;
 
 @Getter

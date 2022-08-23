@@ -3,6 +3,8 @@ package ua.com.alevel.hw2.utils;
 import ua.com.alevel.hw2.command.Commands;
 import ua.com.alevel.hw2.model.PlaneBrand;
 import ua.com.alevel.hw2.model.PlaneType;
+import ua.com.alevel.hw2.model.fighter.TypeOfFighter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public final class UtilEnumToList {
     public static List<String> getNamesOfType(Commands[] commands) {
         List<String> names = new ArrayList<>(commands.length);
         for (Commands type : commands) {
-            names.add(type.name());
+            names.add(type.getName());
         }
         return names;
     }
@@ -29,6 +31,14 @@ public final class UtilEnumToList {
     public static List<String> getNamesOfType(PlaneBrand[] brands) {
         List<String> names = new ArrayList<>(brands.length);
         for (PlaneBrand type : brands) {
+            names.add(type.name());
+        }
+        return names;
+    }
+
+    public static List<String> getNamesOfType(TypeOfFighter[] typeOfFighters) {
+        List<String> names = new ArrayList<>(typeOfFighters.length);
+        for (TypeOfFighter type : typeOfFighters) {
             names.add(type.name());
         }
         return names;

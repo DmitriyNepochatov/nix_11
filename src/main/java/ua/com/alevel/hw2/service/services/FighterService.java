@@ -2,27 +2,31 @@ package ua.com.alevel.hw2.service.services;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
-import ua.com.alevel.hw2.db.FighterDB;
+import ua.com.alevel.hw2.dao.products.fighterdatabase.FighterDatabase;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
+import ua.com.alevel.hw2.model.fighter.Fighter;
+import ua.com.alevel.hw2.model.fighter.TypeOfFighter;
+import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import ua.com.alevel.hw2.service.PlaneService;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 @Singleton
-public class FighterService extends PlaneService<Fighter> {
+public final class FighterService extends PlaneService<Fighter> {
     private static FighterService instance;
 
     public static FighterService getInstance() {
         if (instance == null) {
-            instance = new FighterService(FighterDB.getInstance());
+            instance = new FighterService(FighterDatabase.getInstance());
         }
 
         return instance;
     }
 
-    public static FighterService getInstance(FighterDB planeDB) {
+    public static FighterService getInstance(FighterDatabase planeDB) {
         if (instance == null) {
             instance = new FighterService(planeDB);
         }
@@ -31,14 +35,14 @@ public class FighterService extends PlaneService<Fighter> {
     }
 
     @Autowired
-    private FighterService(FighterDB planeDB) {
+    private FighterService(FighterDatabase planeDB) {
         super(planeDB);
     }
 
     @Override
-    public Fighter createPlane() {
-        Plane[] arr = PlaneFactory.createPlane(PlaneType.FIGHTER, 1);
-        return Arrays.copyOf(arr, arr.length, Fighter[].class)[0];
+    public Fighter[] createPlane(int count) {
+        Plane[] arr = PlaneFactory.createPlane(PlaneType.FIGHTER, count);
+        return Arrays.copyOf(arr, arr.length, Fighter[].class);
     }
 
     @Override
@@ -70,6 +74,7 @@ public class FighterService extends PlaneService<Fighter> {
                 .setManufacturingMaterial((ManufacturingMaterial) map.get("manufacturingMaterial"))
                 .setTypeOfFighter(TypeOfFighter.valueOf(map.get("typeOfFighter").toString()))
                 .setBombLoad(Integer.parseInt(map.get("bombLoad").toString()))
+                .setId(UUID.randomUUID().toString())
                 .build();
     }
 }

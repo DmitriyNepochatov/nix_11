@@ -1,6 +1,9 @@
 package ua.com.alevel.hw2.command;
 
 import ua.com.alevel.hw2.model.*;
+import ua.com.alevel.hw2.model.cargoplane.CargoPlane;
+import ua.com.alevel.hw2.model.fighter.Fighter;
+import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import ua.com.alevel.hw2.service.services.CargoPlaneService;
 import ua.com.alevel.hw2.service.services.FighterService;
 import ua.com.alevel.hw2.service.services.PassengerPlaneService;
