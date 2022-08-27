@@ -1,8 +1,9 @@
-package ua.com.alevel.hw2.dao.invoices;
+package ua.com.alevel.hw2.dao.jdbc.invoices;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
 import ua.com.alevel.hw2.config.JDBCConfig;
+import ua.com.alevel.hw2.dao.InvoiceDao;
 import ua.com.alevel.hw2.model.Plane;
 import ua.com.alevel.hw2.model.PlaneBrand;
 import ua.com.alevel.hw2.model.cargoplane.CargoPlane;
@@ -103,7 +104,7 @@ public final class InvoiceDatabase implements InvoiceDao {
     }
 
     private Invoice createInvoice(ResultSet resultSet) throws SQLException {
-        Invoice invoice = new Invoice(null, 0, null, null);
+        Invoice invoice = new Invoice();
 
         invoice.setId(resultSet.getObject("id").toString());
         invoice.setSum(resultSet.getInt("sum"));
@@ -138,8 +139,7 @@ public final class InvoiceDatabase implements InvoiceDao {
     }
 
     private CargoPlane parseCargoPlane(ResultSet resultSet) throws SQLException {
-        CargoPlane cargoPlane = new CargoPlane(null, null, null, 0, 0,
-                null, null, null, 0, 0);
+        CargoPlane cargoPlane = new CargoPlane();
 
         cargoPlane.setId(resultSet.getObject("id").toString());
         cargoPlane.setBrand(PlaneBrand.valueOf(resultSet.getString("brand")));
@@ -175,8 +175,7 @@ public final class InvoiceDatabase implements InvoiceDao {
     }
 
     private PassengerPlane parsePassengerPlane(ResultSet resultSet) throws SQLException {
-        PassengerPlane passengerPlane = new PassengerPlane(null, null, null, 0, 0,
-                null, null, null, 0, 0);
+        PassengerPlane passengerPlane = new PassengerPlane();
 
         passengerPlane.setId(resultSet.getObject("id").toString());
         passengerPlane.setBrand(PlaneBrand.valueOf(resultSet.getString("brand")));

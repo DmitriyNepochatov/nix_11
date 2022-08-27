@@ -4,18 +4,27 @@ import lombok.Getter;
 import lombok.Setter;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
+@Entity
 public class Fighter extends Plane {
+    @Column(name = "type_of_fighter", nullable = false)
     private TypeOfFighter typeOfFighter;
+
+    @Column(name = "bomb_load", nullable = false)
     private int bombLoad;
+
+    @Transient
     private List<String> details;
 
-    private Fighter() {
+    public Fighter() {
     }
 
     @Override

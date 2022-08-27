@@ -1,4 +1,4 @@
-package ua.com.alevel.hw2.dao.products.fighterdatabase;
+package ua.com.alevel.hw2.dao.jdbc.products.fighterdatabase;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;

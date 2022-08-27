@@ -2,7 +2,7 @@ package ua.com.alevel.hw2.service.services;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
-import ua.com.alevel.hw2.dao.products.passengerplanedatabase.PassengerPlaneDatabase;
+import ua.com.alevel.hw2.dao.jpa.products.passengerplanedatabase.PassengerPlaneDatabaseJPA;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
@@ -11,7 +11,6 @@ import ua.com.alevel.hw2.service.PlaneService;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 @Singleton
 public final class PassengerPlaneService extends PlaneService<PassengerPlane> {
@@ -19,13 +18,13 @@ public final class PassengerPlaneService extends PlaneService<PassengerPlane> {
 
     public static PassengerPlaneService getInstance() {
         if (instance == null) {
-            instance = new PassengerPlaneService(PassengerPlaneDatabase.getInstance());
+            instance = new PassengerPlaneService(PassengerPlaneDatabaseJPA.getInstance());
         }
 
         return instance;
     }
 
-    public static PassengerPlaneService getInstance(PassengerPlaneDatabase planeDB) {
+    public static PassengerPlaneService getInstance(PassengerPlaneDatabaseJPA planeDB) {
         if (instance == null) {
             instance = new PassengerPlaneService(planeDB);
         }
@@ -34,7 +33,7 @@ public final class PassengerPlaneService extends PlaneService<PassengerPlane> {
     }
 
     @Autowired
-    private PassengerPlaneService(PassengerPlaneDatabase planeDB) {
+    private PassengerPlaneService(PassengerPlaneDatabaseJPA planeDB) {
         super(planeDB);
     }
 
@@ -57,7 +56,7 @@ public final class PassengerPlaneService extends PlaneService<PassengerPlane> {
 
     @Override
     public PassengerPlane createPlaneFromMapFoo(Map<String, Object> map) {
-        return new PassengerPlane(UUID.randomUUID().toString(),
+        return new PassengerPlane(
                 PlaneBrand.valueOf(map.get("brand").toString()),
                 map.get("model").toString(),
                 Integer.parseInt(map.get("price").toString()),

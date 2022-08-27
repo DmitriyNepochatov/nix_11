@@ -1,4 +1,4 @@
-package ua.com.alevel.hw2.dao.invoices;
+package ua.com.alevel.hw2.dao;
 
 import ua.com.alevel.hw2.model.invoice.Invoice;
 import java.util.Date;

@@ -2,7 +2,7 @@ package ua.com.alevel.hw2.service.services;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
-import ua.com.alevel.hw2.dao.products.cargoplanedatabase.CargoPlaneDatabase;
+import ua.com.alevel.hw2.dao.jpa.products.cargoplanedatabase.CargoPlaneDatabaseJPA;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.model.cargoplane.CargoPlane;
@@ -11,7 +11,6 @@ import ua.com.alevel.hw2.service.PlaneService;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 @Singleton
 public final class CargoPlaneService extends PlaneService<CargoPlane> {
@@ -19,13 +18,13 @@ public final class CargoPlaneService extends PlaneService<CargoPlane> {
 
     public static CargoPlaneService getInstance() {
         if (instance == null) {
-            instance = new CargoPlaneService(CargoPlaneDatabase.getInstance());
+            instance = new CargoPlaneService(CargoPlaneDatabaseJPA.getInstance());
         }
 
         return instance;
     }
 
-    public static CargoPlaneService getInstance(CargoPlaneDatabase planeDB) {
+    public static CargoPlaneService getInstance(CargoPlaneDatabaseJPA planeDB) {
         if (instance == null) {
             instance = new CargoPlaneService(planeDB);
         }
@@ -34,7 +33,7 @@ public final class CargoPlaneService extends PlaneService<CargoPlane> {
     }
 
     @Autowired
-    private CargoPlaneService(CargoPlaneDatabase planeDB) {
+    private CargoPlaneService(CargoPlaneDatabaseJPA planeDB) {
         super(planeDB);
     }
 
@@ -57,7 +56,7 @@ public final class CargoPlaneService extends PlaneService<CargoPlane> {
 
     @Override
     public CargoPlane createPlaneFromMapFoo(Map<String, Object> map) {
-        return new CargoPlane(UUID.randomUUID().toString(),
+        return new CargoPlane(
                 PlaneBrand.valueOf(map.get("brand").toString()),
                 map.get("model").toString(),
                 Integer.parseInt(map.get("price").toString()),

@@ -2,24 +2,38 @@ package ua.com.alevel.hw2.model.invoice;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import ua.com.alevel.hw2.model.Plane;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
+@Entity
 public class Invoice {
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+
+    @Column(nullable = false)
     private int sum;
+
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Plane> products;
+
+    @Column(nullable = false)
     private Date created;
 
-    public Invoice(String id, int sum, List<Plane> products, Date created) {
-        this.id = id;
+    public Invoice(int sum, List<Plane> products, Date created) {
         this.sum = sum;
         this.products = products;
         this.created = created;
+    }
+
+    public Invoice() {
     }
 
     @Override

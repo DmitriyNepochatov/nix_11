@@ -8,7 +8,6 @@ import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import java.util.Date;
 import java.util.Random;
-import java.util.UUID;
 
 public final class PlaneFactory {
     private static final Random RANDOM = new Random();
@@ -28,8 +27,7 @@ public final class PlaneFactory {
     private static Plane create(PlaneType planeType) {
         return switch (planeType) {
             case CARGO_PLANE -> {
-                CargoPlane cargoPlane = new CargoPlane("", null, "", 0, 0,
-                        "", null, null, 0,0);
+                CargoPlane cargoPlane = new CargoPlane();
                 cargoPlane.setLoadCapacity(RANDOM.nextInt(200)+1);
                 cargoPlane.setCountOfCrew(RANDOM.nextInt(10)+1);
                 yield setPlaneFields(cargoPlane);
@@ -41,8 +39,7 @@ public final class PlaneFactory {
                 yield setPlaneFields(fighter);
             }
             case PASSENGER_PLANE -> {
-                PassengerPlane passengerPlane = new PassengerPlane("", null, "", 0, 0,
-                        "", null, null, 0, 0);
+                PassengerPlane passengerPlane = new PassengerPlane();
                 passengerPlane.setNumberOfPassenger(RANDOM.nextInt(400)+1);
                 passengerPlane.setRangeOfFlight(RANDOM.nextInt(9000)+1);
                 yield setPlaneFields(passengerPlane);
@@ -63,7 +60,6 @@ public final class PlaneFactory {
     }
 
     private static Plane setPlaneFields(Plane plane) {
-        plane.setId(UUID.randomUUID().toString());
         plane.setBrand(getRandomPlaneBrand());
         plane.setModel("Model-" + RANDOM.nextInt(300));
         plane.setPrice(RANDOM.nextInt(5000));
