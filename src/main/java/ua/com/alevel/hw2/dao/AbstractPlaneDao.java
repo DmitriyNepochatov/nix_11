@@ -1,4 +1,4 @@
-package ua.com.alevel.hw2.dao.products;
+package ua.com.alevel.hw2.dao;
 
 import ua.com.alevel.hw2.model.Plane;
 import java.util.List;

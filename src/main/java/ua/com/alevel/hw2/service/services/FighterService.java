@@ -2,7 +2,7 @@ package ua.com.alevel.hw2.service.services;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
-import ua.com.alevel.hw2.dao.products.fighterdatabase.FighterDatabase;
+import ua.com.alevel.hw2.dao.jpa.products.fighterdatabase.FighterDatabaseJPA;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.model.fighter.Fighter;
@@ -12,7 +12,6 @@ import ua.com.alevel.hw2.service.PlaneService;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 @Singleton
 public final class FighterService extends PlaneService<Fighter> {
@@ -20,13 +19,13 @@ public final class FighterService extends PlaneService<Fighter> {
 
     public static FighterService getInstance() {
         if (instance == null) {
-            instance = new FighterService(FighterDatabase.getInstance());
+            instance = new FighterService(FighterDatabaseJPA.getInstance());
         }
 
         return instance;
     }
 
-    public static FighterService getInstance(FighterDatabase planeDB) {
+    public static FighterService getInstance(FighterDatabaseJPA planeDB) {
         if (instance == null) {
             instance = new FighterService(planeDB);
         }
@@ -35,7 +34,7 @@ public final class FighterService extends PlaneService<Fighter> {
     }
 
     @Autowired
-    private FighterService(FighterDatabase planeDB) {
+    private FighterService(FighterDatabaseJPA planeDB) {
         super(planeDB);
     }
 
@@ -74,7 +73,6 @@ public final class FighterService extends PlaneService<Fighter> {
                 .setManufacturingMaterial((ManufacturingMaterial) map.get("manufacturingMaterial"))
                 .setTypeOfFighter(TypeOfFighter.valueOf(map.get("typeOfFighter").toString()))
                 .setBombLoad(Integer.parseInt(map.get("bombLoad").toString()))
-                .setId(UUID.randomUUID().toString())
                 .build();
     }
 }

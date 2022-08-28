@@ -1,4 +1,4 @@
-package ua.com.alevel.hw2.dao.products.cargoplanedatabase;
+package ua.com.alevel.hw2.dao.jdbc.products.cargoplanedatabase;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
@@ -144,8 +144,7 @@ public final class CargoPlaneDatabase implements CargoPlaneDao {
     }
 
     private CargoPlane parsePlane(ResultSet resultSet) throws SQLException {
-        CargoPlane cargoPlane = new CargoPlane(null, null, null, 0, 0,
-                null, null, null, 0, 0);
+        CargoPlane cargoPlane = new CargoPlane();
 
         cargoPlane.setId(resultSet.getObject("id").toString());
         cargoPlane.setBrand(PlaneBrand.valueOf(resultSet.getString("brand")));

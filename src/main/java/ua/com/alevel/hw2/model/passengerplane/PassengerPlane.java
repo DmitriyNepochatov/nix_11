@@ -6,21 +6,30 @@ import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import ua.com.alevel.hw2.model.Plane;
 import ua.com.alevel.hw2.model.PlaneBrand;
 import ua.com.alevel.hw2.model.PlaneType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.util.Date;
 import java.util.Objects;
 
 @Getter
 @Setter
+@Entity
 public class PassengerPlane extends Plane {
+    @Column(name = "number_of_passenger", nullable = false)
     private int numberOfPassenger;
+
+    @Column(name = "range_of_flight", nullable = false)
     private int rangeOfFlight;
 
-    public PassengerPlane(String id, PlaneBrand brand, String model, int price, int count, String currency,
+    public PassengerPlane(PlaneBrand brand, String model, int price, int count, String currency,
                           Date created, ManufacturingMaterial manufacturingMaterial, int numberOfPassenger,
                           int rangeOfFlight) {
-        super(id, brand, model, price, count, currency, created, manufacturingMaterial, PlaneType.PASSENGER_PLANE);
+        super(brand, model, price, count, currency, created, manufacturingMaterial, PlaneType.PASSENGER_PLANE);
         this.numberOfPassenger = numberOfPassenger;
         this.rangeOfFlight = rangeOfFlight;
+    }
+
+    public PassengerPlane() {
     }
 
     @Override

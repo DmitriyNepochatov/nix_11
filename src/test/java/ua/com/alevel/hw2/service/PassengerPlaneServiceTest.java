@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
-import ua.com.alevel.hw2.dao.products.passengerplanedatabase.PassengerPlaneDatabase;
+import ua.com.alevel.hw2.dao.jpa.products.passengerplanedatabase.PassengerPlaneDatabaseJPA;
 import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import ua.com.alevel.hw2.model.PlaneBrand;
@@ -19,14 +19,14 @@ import static org.mockito.ArgumentMatchers.anyString;
 
 class PassengerPlaneServiceTest {
     private PassengerPlaneService target;
-    private static PassengerPlaneDatabase planeDB;
+    private static PassengerPlaneDatabaseJPA planeDB;
     private PassengerPlane passengerPlane;
     private Date date;
     private ManufacturingMaterial manufacturingMaterial;
 
     @BeforeAll
     private static void setup() {
-        planeDB = Mockito.mock(PassengerPlaneDatabase.class);
+        planeDB = Mockito.mock(PassengerPlaneDatabaseJPA.class);
         setMock(planeDB);
     }
 
@@ -38,7 +38,7 @@ class PassengerPlaneServiceTest {
         date = new Date();
         manufacturingMaterial = new ManufacturingMaterial("Material-" + 150, "Color-" + 300);
 
-        passengerPlane = new PassengerPlane("12",
+        passengerPlane = new PassengerPlane(
                 PlaneBrand.BOEING,
                 "747",
                 1000,
@@ -66,7 +66,7 @@ class PassengerPlaneServiceTest {
 
     @Test
     void update() {
-        PassengerPlane plane = new PassengerPlane(passengerPlane.getId(),
+        PassengerPlane plane = new PassengerPlane(
                 PlaneBrand.BOEING,
                 "707",
                 5000,
@@ -137,9 +137,9 @@ class PassengerPlaneServiceTest {
         Mockito.verify(planeDB).findAll();
     }
 
-    private static void setMock(PassengerPlaneDatabase mock) {
+    private static void setMock(PassengerPlaneDatabaseJPA mock) {
         try {
-            Field instance = PassengerPlaneDatabase.class.getDeclaredField("instance");
+            Field instance = PassengerPlaneDatabaseJPA.class.getDeclaredField("instance");
             instance.setAccessible(true);
             instance.set(instance, mock);
         }

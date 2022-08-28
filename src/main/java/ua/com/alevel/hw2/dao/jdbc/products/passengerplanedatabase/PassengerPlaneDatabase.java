@@ -1,4 +1,4 @@
-package ua.com.alevel.hw2.dao.products.passengerplanedatabase;
+package ua.com.alevel.hw2.dao.jdbc.products.passengerplanedatabase;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
@@ -147,8 +147,7 @@ public final class PassengerPlaneDatabase implements PassengerPlaneDao {
     }
 
     private PassengerPlane parsePlane(ResultSet resultSet) throws SQLException {
-        PassengerPlane passengerPlane = new PassengerPlane(null, null, null, 0, 0,
-                null, null, null, 0, 0);
+        PassengerPlane passengerPlane = new PassengerPlane();
 
         passengerPlane.setId(resultSet.getObject("id").toString());
         passengerPlane.setBrand(PlaneBrand.valueOf(resultSet.getString("brand")));

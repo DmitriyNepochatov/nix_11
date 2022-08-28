@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import ua.com.alevel.hw2.dao.products.passengerplanedatabase.PassengerPlaneDatabase;
+import ua.com.alevel.hw2.dao.jpa.products.passengerplanedatabase.PassengerPlaneDatabaseJPA;
 import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import ua.com.alevel.hw2.model.PlaneBrand;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 class OptionalExamplesTest {
     private OptionalExamplesPassengerPlane target;
-    private static PassengerPlaneDatabase planeDB;
+    private static PassengerPlaneDatabaseJPA planeDB;
     private static PassengerPlaneService passengerPlaneService;
     private PassengerPlane passengerPlane;
     private Date date;
@@ -25,7 +25,7 @@ class OptionalExamplesTest {
 
     @BeforeAll
     public static void setup() {
-        planeDB = Mockito.mock(PassengerPlaneDatabase.class);
+        planeDB = Mockito.mock(PassengerPlaneDatabaseJPA.class);
         setMock(planeDB);
     }
 
@@ -38,7 +38,7 @@ class OptionalExamplesTest {
         date = new Date();
         manufacturingMaterial = new ManufacturingMaterial("Material-" + 150, "Color-" + 300);
 
-        passengerPlane = new PassengerPlane("12",
+        passengerPlane = new PassengerPlane(
                 PlaneBrand.BOEING,
                 "747",
                 1000,
@@ -53,7 +53,7 @@ class OptionalExamplesTest {
 
     @Test
     void updateIfPresent_ifPresent() {
-        PassengerPlane passengerPlaneTest = new PassengerPlane(passengerPlane.getId(),
+        PassengerPlane passengerPlaneTest = new PassengerPlane(
                 PlaneBrand.LOCKHEED,
                 "GoldenStar",
                 1500,
@@ -78,7 +78,7 @@ class OptionalExamplesTest {
 
     @Test
     void findByIdOrReturnFindablePlane_finded() {
-        PassengerPlane passengerPlaneTest = new PassengerPlane(passengerPlane.getId(),
+        PassengerPlane passengerPlaneTest = new PassengerPlane(
                 PlaneBrand.LOCKHEED,
                 "GoldenStar",
                 1500,
@@ -103,7 +103,7 @@ class OptionalExamplesTest {
 
     @Test
     void findByIdOrSaveIfNotDuplicate_finded() {
-        PassengerPlane passengerPlaneTest = new PassengerPlane(passengerPlane.getId(),
+        PassengerPlane passengerPlaneTest = new PassengerPlane(
                 PlaneBrand.LOCKHEED,
                 "GoldenStar",
                 1500,
@@ -121,7 +121,7 @@ class OptionalExamplesTest {
 
     @Test
     void findByIdOrSaveIfNotDuplicate_notFinded() {
-        PassengerPlane passengerPlaneTest = new PassengerPlane(passengerPlane.getId(),
+        PassengerPlane passengerPlaneTest = new PassengerPlane(
                 PlaneBrand.LOCKHEED,
                 "GoldenStar",
                 1500,
@@ -155,7 +155,7 @@ class OptionalExamplesTest {
 
     @Test
     void updateIfPresentOrSave_ifPresent() {
-        PassengerPlane passengerPlaneTest = new PassengerPlane(passengerPlane.getId(),
+        PassengerPlane passengerPlaneTest = new PassengerPlane(
                 PlaneBrand.LOCKHEED,
                 "GoldenStar",
                 1500,
@@ -182,7 +182,7 @@ class OptionalExamplesTest {
 
     @Test
     void deletePlaneIfWasBuiltByBoeing_wasBuiltByBoeing() {
-        PassengerPlane passengerPlaneTest = new PassengerPlane(passengerPlane.getId(),
+        PassengerPlane passengerPlaneTest = new PassengerPlane(
                 PlaneBrand.BOEING,
                 "GoldenStar",
                 1500,
@@ -202,7 +202,7 @@ class OptionalExamplesTest {
 
     @Test
     void deletePlaneIfWasBuiltByBoeing_wasNotBuiltByBoeing() {
-        PassengerPlane passengerPlaneTest = new PassengerPlane(passengerPlane.getId(),
+        PassengerPlane passengerPlaneTest = new PassengerPlane(
                 PlaneBrand.LOCKHEED,
                 "GoldenStar",
                 1500,
@@ -233,7 +233,7 @@ class OptionalExamplesTest {
 
     @Test
     void findByIdOrBackPlaneInOptional_finded() {
-        PassengerPlane passengerPlaneTest = new PassengerPlane(passengerPlane.getId(),
+        PassengerPlane passengerPlaneTest = new PassengerPlane(
                 PlaneBrand.LOCKHEED,
                 "GoldenStar",
                 1500,
@@ -256,9 +256,9 @@ class OptionalExamplesTest {
         Assertions.assertEquals(Optional.of(passengerPlane), result);
     }
 
-    private static void setMock(PassengerPlaneDatabase mock) {
+    private static void setMock(PassengerPlaneDatabaseJPA mock) {
         try {
-            Field instance = PassengerPlaneDatabase.class.getDeclaredField("instance");
+            Field instance = PassengerPlaneDatabaseJPA.class.getDeclaredField("instance");
             instance.setAccessible(true);
             instance.set(instance, mock);
         }

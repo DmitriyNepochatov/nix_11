@@ -1,6 +1,6 @@
 package ua.com.alevel.hw2.service;
 
-import ua.com.alevel.hw2.dao.products.AbstractPlaneDao;
+import ua.com.alevel.hw2.dao.AbstractPlaneDao;
 import ua.com.alevel.hw2.model.Plane;
 import java.util.*;
 import java.util.function.Function;

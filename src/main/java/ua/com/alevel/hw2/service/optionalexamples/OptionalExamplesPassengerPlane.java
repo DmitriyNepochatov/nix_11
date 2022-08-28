@@ -1,7 +1,7 @@
 package ua.com.alevel.hw2.service.optionalexamples;
 
-import ua.com.alevel.hw2.dao.products.AbstractPlaneDao;
-import ua.com.alevel.hw2.dao.products.passengerplanedatabase.PassengerPlaneDatabase;
+import ua.com.alevel.hw2.dao.AbstractPlaneDao;
+import ua.com.alevel.hw2.dao.jdbc.products.passengerplanedatabase.PassengerPlaneDatabase;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import ua.com.alevel.hw2.service.services.PassengerPlaneService;
