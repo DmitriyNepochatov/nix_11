@@ -1,5 +1,6 @@
 package ua.com.alevel.hw2.dao.jpa.products.fighterdatabase;
 
+import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
 import ua.com.alevel.hw2.config.JPAConfig;
 import ua.com.alevel.hw2.model.fighter.Fighter;
@@ -13,6 +14,7 @@ public final class FighterDatabaseJPA implements FighterDaoJPA {
     private static final EntityManager ENTITY_MANAGER = JPAConfig.getEntityManager();
     private static FighterDatabaseJPA instance;
 
+    @Autowired
     private FighterDatabaseJPA() {
     }
 

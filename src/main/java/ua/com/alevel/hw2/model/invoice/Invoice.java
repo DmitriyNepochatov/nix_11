@@ -5,9 +5,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import ua.com.alevel.hw2.model.Plane;
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -22,18 +20,25 @@ public class Invoice {
     private int sum;
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Plane> products;
+    private transient List<Plane> products;
+
+    @Transient
+    private List<String> planes;
 
     @Column(nullable = false)
     private Date created;
 
     public Invoice(int sum, List<Plane> products, Date created) {
+        this();
         this.sum = sum;
         this.products = products;
+        planes = new ArrayList<>(this.products.size());
+        this.products.forEach(product -> planes.add(product.getId()));
         this.created = created;
     }
 
     public Invoice() {
+        id = UUID.randomUUID().toString();
     }
 
     @Override

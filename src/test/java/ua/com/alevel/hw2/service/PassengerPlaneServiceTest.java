@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
-import ua.com.alevel.hw2.dao.jpa.products.passengerplanedatabase.PassengerPlaneDatabaseJPA;
+import ua.com.alevel.hw2.dao.mongodb.products.passengerplanedatabase.PassengerPlaneDatabaseMongoDB;
 import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import ua.com.alevel.hw2.model.passengerplane.PassengerPlane;
 import ua.com.alevel.hw2.model.PlaneBrand;
@@ -19,14 +19,14 @@ import static org.mockito.ArgumentMatchers.anyString;
 
 class PassengerPlaneServiceTest {
     private PassengerPlaneService target;
-    private static PassengerPlaneDatabaseJPA planeDB;
+    private static PassengerPlaneDatabaseMongoDB planeDB;
     private PassengerPlane passengerPlane;
     private Date date;
     private ManufacturingMaterial manufacturingMaterial;
 
     @BeforeAll
     private static void setup() {
-        planeDB = Mockito.mock(PassengerPlaneDatabaseJPA.class);
+        planeDB = Mockito.mock(PassengerPlaneDatabaseMongoDB.class);
         setMock(planeDB);
     }
 
@@ -137,9 +137,9 @@ class PassengerPlaneServiceTest {
         Mockito.verify(planeDB).findAll();
     }
 
-    private static void setMock(PassengerPlaneDatabaseJPA mock) {
+    private static void setMock(PassengerPlaneDatabaseMongoDB mock) {
         try {
-            Field instance = PassengerPlaneDatabaseJPA.class.getDeclaredField("instance");
+            Field instance = PassengerPlaneDatabaseMongoDB.class.getDeclaredField("instance");
             instance.setAccessible(true);
             instance.set(instance, mock);
         }

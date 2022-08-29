@@ -1,5 +1,6 @@
 package ua.com.alevel.hw2.dao.jpa.products.cargoplanedatabase;
 
+import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
 import ua.com.alevel.hw2.config.JPAConfig;
 import ua.com.alevel.hw2.model.cargoplane.CargoPlane;
@@ -13,6 +14,7 @@ public final class CargoPlaneDatabaseJPA implements CargoPlaneDaoJPA {
     private static final EntityManager ENTITY_MANAGER = JPAConfig.getEntityManager();
     private static CargoPlaneDatabaseJPA instance;
 
+    @Autowired
     private CargoPlaneDatabaseJPA() {
     }
 
