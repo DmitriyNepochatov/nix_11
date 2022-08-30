@@ -7,6 +7,7 @@ import ua.com.alevel.hw2.model.invoice.Invoice;
 import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -37,20 +38,22 @@ public abstract class Plane {
     protected Date created;
 
     @Transient
-    protected ManufacturingMaterial manufacturingMaterial;
+    protected transient ManufacturingMaterial manufacturingMaterial;
 
     @Transient
-    protected PlaneType type;
+    protected transient PlaneType type;
 
     @ManyToOne
     @JoinColumn(name = "invoice_id")
-    protected Invoice invoice;
+    protected transient Invoice invoice;
 
     public Plane() {
+        id = UUID.randomUUID().toString();
     }
 
     public Plane(PlaneBrand brand, String model, int price, int count, String currency,
                  Date created, ManufacturingMaterial manufacturingMaterial, PlaneType type) {
+        this();
         this.brand = brand;
         this.model = model;
         this.price = price;

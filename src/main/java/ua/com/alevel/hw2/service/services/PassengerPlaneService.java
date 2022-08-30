@@ -2,7 +2,7 @@ package ua.com.alevel.hw2.service.services;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
-import ua.com.alevel.hw2.dao.jpa.products.passengerplanedatabase.PassengerPlaneDatabaseJPA;
+import ua.com.alevel.hw2.dao.mongodb.products.passengerplanedatabase.PassengerPlaneDatabaseMongoDB;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.model.manufacturingmaterial.ManufacturingMaterial;
@@ -18,13 +18,13 @@ public final class PassengerPlaneService extends PlaneService<PassengerPlane> {
 
     public static PassengerPlaneService getInstance() {
         if (instance == null) {
-            instance = new PassengerPlaneService(PassengerPlaneDatabaseJPA.getInstance());
+            instance = new PassengerPlaneService(PassengerPlaneDatabaseMongoDB.getInstance());
         }
 
         return instance;
     }
 
-    public static PassengerPlaneService getInstance(PassengerPlaneDatabaseJPA planeDB) {
+    public static PassengerPlaneService getInstance(PassengerPlaneDatabaseMongoDB planeDB) {
         if (instance == null) {
             instance = new PassengerPlaneService(planeDB);
         }
@@ -33,7 +33,7 @@ public final class PassengerPlaneService extends PlaneService<PassengerPlane> {
     }
 
     @Autowired
-    private PassengerPlaneService(PassengerPlaneDatabaseJPA planeDB) {
+    private PassengerPlaneService(PassengerPlaneDatabaseMongoDB planeDB) {
         super(planeDB);
     }
 

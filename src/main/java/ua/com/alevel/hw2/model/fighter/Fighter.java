@@ -22,7 +22,7 @@ public class Fighter extends Plane {
     private int bombLoad;
 
     @Transient
-    private List<String> details;
+    private transient List<String> details;
 
     public Fighter() {
     }

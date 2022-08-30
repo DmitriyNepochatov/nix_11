@@ -2,7 +2,7 @@ package ua.com.alevel.hw2.service.services;
 
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
-import ua.com.alevel.hw2.dao.jpa.products.fighterdatabase.FighterDatabaseJPA;
+import ua.com.alevel.hw2.dao.mongodb.products.fighterdatabase.FighterDatabaseMongoDB;
 import ua.com.alevel.hw2.factory.PlaneFactory;
 import ua.com.alevel.hw2.model.*;
 import ua.com.alevel.hw2.model.fighter.Fighter;
@@ -19,13 +19,13 @@ public final class FighterService extends PlaneService<Fighter> {
 
     public static FighterService getInstance() {
         if (instance == null) {
-            instance = new FighterService(FighterDatabaseJPA.getInstance());
+            instance = new FighterService(FighterDatabaseMongoDB.getInstance());
         }
 
         return instance;
     }
 
-    public static FighterService getInstance(FighterDatabaseJPA planeDB) {
+    public static FighterService getInstance(FighterDatabaseMongoDB planeDB) {
         if (instance == null) {
             instance = new FighterService(planeDB);
         }
@@ -34,7 +34,7 @@ public final class FighterService extends PlaneService<Fighter> {
     }
 
     @Autowired
-    private FighterService(FighterDatabaseJPA planeDB) {
+    private FighterService(FighterDatabaseMongoDB planeDB) {
         super(planeDB);
     }
 
