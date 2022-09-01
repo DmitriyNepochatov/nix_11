@@ -19,7 +19,8 @@ public final class FlywayConfig {
                 .schemas(SCHEMA)
                 .locations(LOCATION)
                 .load();
-
+        flyway.clean();
+        JPAConfig.getEntityManager();
         flyway.migrate();
     }
 }
