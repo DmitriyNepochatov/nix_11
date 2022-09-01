@@ -15,6 +15,7 @@
             <property name="javax.persistence.jdbc.password" value="3da62380e3c79bbcac5ca9dc0f5936b03b8ebf238a8507516b39a5886ea17725"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.default_schema" value="public"/>
         </properties>
     </persistence-unit>
 </persistence>
