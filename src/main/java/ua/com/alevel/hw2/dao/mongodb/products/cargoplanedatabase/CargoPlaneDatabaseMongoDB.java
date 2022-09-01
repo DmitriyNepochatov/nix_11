@@ -11,7 +11,7 @@ import ua.com.alevel.hw2.model.cargoplane.CargoPlane;
 import ua.com.alevel.hw2.model.invoice.Invoice;
 import java.util.*;
 
-@Singleton
+//@Singleton
 public final class CargoPlaneDatabaseMongoDB implements CargoPlaneDaoMongoDB {
     private static final MongoCollection<Document> COLLECTION = MongoDBConfig.getMongoDatabase()
             .getCollection(CargoPlane.class.getSimpleName());
@@ -20,7 +20,7 @@ public final class CargoPlaneDatabaseMongoDB implements CargoPlaneDaoMongoDB {
     private static Gson gson;
     private static CargoPlaneDatabaseMongoDB instance;
 
-    @Autowired
+    //@Autowired
     private CargoPlaneDatabaseMongoDB() {
         gson = new Gson();
     }
