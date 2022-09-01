@@ -1,6 +1,7 @@
 package ua.com.alevel.hw2.config;
 
 import org.flywaydb.core.Flyway;
+import ua.com.alevel.hw2.context.Context;
 
 public final class FlywayConfig {
     private static final String URL = "jdbc:postgresql://ec2-34-247-72-29.eu-west-1.compute.amazonaws.com:5432/dfvea792kece9j";
@@ -20,7 +21,7 @@ public final class FlywayConfig {
                 .locations(LOCATION)
                 .load();
         flyway.clean();
-        JPAConfig.getEntityManager();
+        new Context().createSingletonClasses();
         flyway.migrate();
     }
 }
