@@ -3,7 +3,7 @@ package ua.com.alevel.hw2.service.invoiceservice;
 import ua.com.alevel.hw2.annotations.Autowired;
 import ua.com.alevel.hw2.annotations.Singleton;
 import ua.com.alevel.hw2.dao.InvoiceDao;
-import ua.com.alevel.hw2.dao.mongodb.invoices.InvoiceDatabaseMongoDB;
+import ua.com.alevel.hw2.dao.jpa.invoices.InvoiceDatabaseJPA;
 import ua.com.alevel.hw2.model.Plane;
 import ua.com.alevel.hw2.model.invoice.Invoice;
 import ua.com.alevel.hw2.utils.SimpleOperationsOnInvoice;
@@ -15,13 +15,13 @@ public final class InvoiceService {
     private final InvoiceDao invoiceDao;
 
     @Autowired
-    private InvoiceService(InvoiceDatabaseMongoDB invoiceDatabaseJPA) {
+    private InvoiceService(InvoiceDatabaseJPA invoiceDatabaseJPA) {
         this.invoiceDao = invoiceDatabaseJPA;
     }
 
     public static InvoiceService getInstance() {
         if (instance == null) {
-            instance = new InvoiceService(InvoiceDatabaseMongoDB.getInstance());
+            instance = new InvoiceService(InvoiceDatabaseJPA.getInstance());
         }
 
         return instance;

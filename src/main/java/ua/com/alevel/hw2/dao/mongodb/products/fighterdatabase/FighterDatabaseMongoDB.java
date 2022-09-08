@@ -11,7 +11,7 @@ import ua.com.alevel.hw2.model.fighter.Fighter;
 import ua.com.alevel.hw2.model.invoice.Invoice;
 import java.util.*;
 
-@Singleton
+//@Singleton
 public final class FighterDatabaseMongoDB implements FighterDaoMongoDB {
     private static final MongoCollection<Document> COLLECTION = MongoDBConfig.getMongoDatabase()
             .getCollection(Fighter.class.getSimpleName());
@@ -20,7 +20,7 @@ public final class FighterDatabaseMongoDB implements FighterDaoMongoDB {
     private static Gson gson;
     private static FighterDatabaseMongoDB instance;
 
-    @Autowired
+    //@Autowired
     private FighterDatabaseMongoDB() {
         gson = new Gson();
     }

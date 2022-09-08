@@ -38,22 +38,20 @@ public abstract class Plane {
     protected Date created;
 
     @Transient
-    protected transient ManufacturingMaterial manufacturingMaterial;
+    protected ManufacturingMaterial manufacturingMaterial;
 
     @Transient
-    protected transient PlaneType type;
+    protected PlaneType type;
 
     @ManyToOne
     @JoinColumn(name = "invoice_id")
-    protected transient Invoice invoice;
+    protected Invoice invoice;
 
     public Plane() {
-        id = UUID.randomUUID().toString();
     }
 
     public Plane(PlaneBrand brand, String model, int price, int count, String currency,
                  Date created, ManufacturingMaterial manufacturingMaterial, PlaneType type) {
-        this();
         this.brand = brand;
         this.model = model;
         this.price = price;

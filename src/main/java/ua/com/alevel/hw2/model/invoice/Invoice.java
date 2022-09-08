@@ -20,7 +20,7 @@ public class Invoice {
     private int sum;
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private transient List<Plane> products;
+    private List<Plane> products;
 
     @Transient
     private List<String> planes;
@@ -29,7 +29,6 @@ public class Invoice {
     private Date created;
 
     public Invoice(int sum, List<Plane> products, Date created) {
-        this();
         this.sum = sum;
         this.products = products;
         planes = new ArrayList<>(this.products.size());
@@ -38,7 +37,6 @@ public class Invoice {
     }
 
     public Invoice() {
-        id = UUID.randomUUID().toString();
     }
 
     @Override
